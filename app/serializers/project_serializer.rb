@@ -9,11 +9,11 @@ class ProjectSerializer < ApplicationSerializer
 
     properties do |p|
       p.title              item.new_name
-      p.image              item.image_data
+      p.image              item.image_small
       p.description        item.new_ShortDescription.force_encoding(Encoding::UTF_8)
       p.location           item.new_geoexplain
-      p.primary_department item.new_LeadDepartment
-      p.project_manager    item.new_ProjectManagement
+      p.primary_department item.department_name
+      p.project_manager    item.manager_name
       p.website            item.new_Website
       p.status             item.status
     end

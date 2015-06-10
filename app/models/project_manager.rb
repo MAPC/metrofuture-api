@@ -5,5 +5,5 @@ class ProjectManager < ActiveRecord::Base
 
   default_scope { where("OwnerIdType" => 8) }
 
-  has_many :projects, foreign_key: 'OwnerId'
+  has_many :projects, class_name: 'Base::Project', foreign_key: 'OwnerId'
 end

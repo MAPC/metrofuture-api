@@ -9,6 +9,7 @@ gem 'pg' # For test database
 # gem 'lazy_columns', github: 'jorgemanrubia/lazy_columns' # Lazy-load large columns
 
 gem 'oat'  # JSON API
+gem 'rmagick'
 
 # Utilities
 gem 'foreman'

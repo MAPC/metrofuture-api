@@ -3,9 +3,9 @@ class Project < ActiveRecord::Base
   self.primary_key = 'new_mapcprojectId'
   include SimplePrimaryKey
 
+  belongs_to :project_base, class_name: 'Base::Project', foreign_key: 'new_mapcprojectId'
+
   has_one :image, foreign_key: 'ObjectId'
-  belongs_to :manager, class_name: 'ProjectManager', foreign_key: 'OwnerId'
-  has_one :lead_department, class_name: 'Department', foreign_key: 'OwningBusinessUnit'
 
   alias_attribute :title,   'new_name'
   alias_attribute :visible, 'new_Showonwebsite'
@@ -17,6 +17,14 @@ class Project < ActiveRecord::Base
               100000002 => 'Completed', 
               100000003 => 'In Development'  }
 
+  def manager_name
+    self.project_base.manager.try(:Name)
+  end
+
+  def department_name
+    self.project_base.lead_department.try(:Name)
+  end
+
   def status
     STATUS.fetch(new_ProjectStatus) { nil }
   end
@@ -27,6 +35,10 @@ class Project < ActiveRecord::Base
 
   def image_data
     image.try(:data)
+  end
+
+  def image_small
+    image.try(:small)
   end
 
   def next # TODO base these off the ProjectBase ID, not the UUID.

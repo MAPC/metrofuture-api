@@ -13,7 +13,15 @@ class Image < ActiveRecord::Base
   alias_attribute :body, "DocumentBody"
 
   def data
-    "data:#{ mime_type };base64,#{body}"
+    "data:#{ mime_type };base64,#{ body }"
+  end
+
+  def small
+    i = Magick::Image.read_inline(data).first
+
+    i = i.resize_to_fill( 300, 200 ) # 475, 325
+    new_body = Base64.encode64 i.to_blob
+    "data:#{ mime_type };base64,#{ new_body }"
   end
 
 end
