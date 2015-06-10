@@ -31,6 +31,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    api-pagination (4.1.1)
     arel (5.0.1.20140414130214)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -96,8 +97,6 @@ GEM
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oat (0.4.6)
-      activesupport
     pg (0.18.2)
     polyglot (0.3.5)
     pry (0.10.1)
@@ -106,7 +105,10 @@ GEM
       slop (~> 3.4)
     puma (2.11.3)
       rack (>= 1.1, < 2.0)
+    rabl (0.11.6)
+      activesupport (>= 2.3.14)
     rack (1.5.3)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.1.0)
@@ -187,6 +189,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-sqlserver-adapter (= 4.1.0)
+  api-pagination
   better_errors
   binding_of_caller
   childprocess (~> 0.5)
@@ -198,9 +201,10 @@ DEPENDENCIES
   kaminari
   minitest
   naught
-  oat
   pg
   puma
+  rabl
+  rack-cors
   rails (= 4.1.0)
   rails-api
   rails-erd

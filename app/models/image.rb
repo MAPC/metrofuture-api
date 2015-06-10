@@ -16,10 +16,16 @@ class Image < ActiveRecord::Base
     "data:#{ mime_type };base64,#{ body }"
   end
 
+  def full
+    i = Magick::Image.read_inline(data).first
+    i = i.resize_to_fill( 1200, 800 )
+    new_body = Base64.encode64 i.to_blob
+    "data:#{ mime_type };base64,#{ new_body }"
+  end
+
   def small
     i = Magick::Image.read_inline(data).first
-
-    i = i.resize_to_fill( 300, 200 ) # 475, 325
+    i = i.resize_to_fill( 300, 200 )
     new_body = Base64.encode64 i.to_blob
     "data:#{ mime_type };base64,#{ new_body }"
   end

@@ -41,6 +41,10 @@ class Project < ActiveRecord::Base
     image.try(:small)
   end
 
+  def image_full
+    image.try(:full)
+  end
+
   def next # TODO base these off the ProjectBase ID, not the UUID.
     Project.where("'new_mapcprojectId' > ?", new_mapcprojectId).first
   end

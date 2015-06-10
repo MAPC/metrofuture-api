@@ -8,9 +8,11 @@ gem 'tiny_tds'
 gem 'pg' # For test database
 # gem 'lazy_columns', github: 'jorgemanrubia/lazy_columns' # Lazy-load large columns
 
-gem 'oat'      # JSON API
+gem 'rabl' # JSON API
+gem 'api-pagination'
 gem 'rmagick'  # Image processing
 gem 'kaminari' # Pagination
+gem 'rack-cors', require: 'rack/cors'
 
 # Utilities
 gem 'foreman'
