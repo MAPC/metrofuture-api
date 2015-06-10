@@ -9,7 +9,6 @@ gem 'pg' # For test database
 # gem 'lazy_columns', github: 'jorgemanrubia/lazy_columns' # Lazy-load large columns
 
 gem 'oat'  # JSON API
-gem 'puma' # App server
 
 # Utilities
 gem 'foreman'
@@ -34,4 +33,8 @@ group :development, :test do
   gem 'childprocess',          '~> 0.5' # Fix a version conflict
   gem 'webmock', '~> 1.8.4', require: false # Faking requests (supports VCR)
   gem 'minitest'                        # Unclear why we use this
+end
+
+group :production do
+  gem 'puma' # App server
 end
