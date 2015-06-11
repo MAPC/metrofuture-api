@@ -11,7 +11,7 @@ end
 node :attributes do |p|
   { 
     title:              p.new_name,
-    # image:              p.send( locals.fetch(:image_method) { :image_full } ),
+    image:              p.send( locals.fetch(:image_method) { :image_full } ),
     description:        p.new_ShortDescription.force_encoding(Encoding::UTF_8),
     location:           p.new_geoexplain,
     primary_department: p.department_name,
