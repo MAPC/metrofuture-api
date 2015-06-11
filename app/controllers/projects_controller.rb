@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
     per_page    = params[:page] ? ( params[:page][:size]   || Kaminari.config.default_per_page ) : Kaminari.config.default_per_page
 
     @projects = Project.all.page(page_number).per(per_page)
-    render 'projects/index'
+    render json: @projects
   end
 
   def show

@@ -9,7 +9,8 @@ class Extension::Project < ActiveRecord::Base
   alias_attribute :visible, 'new_Showonwebsite'
   alias_attribute :public,  :visible
 
-  STATUS = {  100000001 => 'In Progress',
+  STATUS = {  100000000 => 'Proposed',
+              100000001 => 'In Progress',
               100000002 => 'Completed', 
               100000003 => 'In Development'  }
               
@@ -19,18 +20,6 @@ class Extension::Project < ActiveRecord::Base
 
   def public?
     visible
-  end
-
-  def image_data
-    image.try(:data)
-  end
-
-  def image_small
-    image.try(:small)
-  end
-
-  def image_full
-    image.try(:full)
   end
 
   def next

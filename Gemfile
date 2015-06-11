@@ -8,7 +8,8 @@ gem 'tiny_tds'
 gem 'pg' # For test database
 # gem 'lazy_columns', github: 'jorgemanrubia/lazy_columns' # Lazy-load large columns
 
-gem 'rabl' # JSON API
+ # JSON API
+gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers.git", branch: "master"
 gem 'api-pagination'
 gem 'rmagick'  # Image processing
 gem 'kaminari' # Pagination
