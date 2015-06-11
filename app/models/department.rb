@@ -3,5 +3,5 @@ class Department < ActiveRecord::Base
   self.primary_key = 'BusinessUnitId'
   include SimplePrimaryKey
 
-  has_many :projects, class_name: 'Base::Project', foreign_key: 'OwningBusinessUnit'
+  has_many :projects, class_name: 'Project', foreign_key: 'OwningBusinessUnit'
 end

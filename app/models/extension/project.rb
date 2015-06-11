@@ -5,8 +5,6 @@ class Extension::Project < ActiveRecord::Base
 
   belongs_to :base, class_name: 'Project', foreign_key: 'new_mapcprojectId'
 
-  has_one :image, foreign_key: 'ObjectId'
-
   alias_attribute :title,   'new_name'
   alias_attribute :visible, 'new_Showonwebsite'
   alias_attribute :public,  :visible
@@ -14,15 +12,7 @@ class Extension::Project < ActiveRecord::Base
   STATUS = {  100000001 => 'In Progress',
               100000002 => 'Completed', 
               100000003 => 'In Development'  }
-
-  def manager_name
-    self.project_base.manager.try(:Name)
-  end
-
-  def department_name
-    self.project_base.lead_department.try(:Name)
-  end
-
+              
   def status
     STATUS.fetch(new_ProjectStatus) { nil }
   end
@@ -43,11 +33,17 @@ class Extension::Project < ActiveRecord::Base
     image.try(:full)
   end
 
-  def next # TODO base these off the ProjectBase ID, not the UUID.
-    Project.where("'new_mapcprojectId' > ?", new_mapcprojectId).first
+  def next
+    # Looks up all the IDs, gets the next ID in the list
+    # and uses that to look up the object.
+    ids = Project.pluck(:new_count)
+    id  = ids[ ids.index(self.new_count) + 1 ]
+    Project.where("new_mapcprojectExtensionBase.new_count = ?", id.to_s).first
   end
 
   def prev
-    Project.where("'new_mapcprojectId' < ?", new_mapcprojectId).last
+    ids = Project.pluck(:new_count).reverse!
+    id  = ids[ ids.index(self.new_count) + 1 ]
+    Project.where("new_mapcprojectExtensionBase.new_count = ?", id.to_s).first
   end
 end
