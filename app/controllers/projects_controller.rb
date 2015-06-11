@@ -1,14 +1,16 @@
 class ProjectsController < ApplicationController
-  helper ApiHelper
+  include ApiHelper
 
   def index
     @projects = Project.all.page(page_number).per(per_page)
-    render json: JSONAPI::Serializer.serialize(@projects, include: includes, is_collection: true)
+    json = JSONAPI::Serializer.serialize(@projects, include: includes, is_collection: true)
+    json[:links] = paginate(@projects)
+    render json: json
   end
 
   def show
-    includes    = params[:include] ? ( params[:include].split(',') ) : []
     @project = Project.find params[:id]
-    render json: JSONAPI::Serializer.serialize(@project, include: includes, is_collection: false)
+    json = JSONAPI::Serializer.serialize(@project, include: includes, is_collection: false)
+    render json: json
   end
 end
