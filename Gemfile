@@ -19,6 +19,8 @@ gem 'foreman'
 gem 'naught'               # Helps build null objects
 gem 'stamp', '0.6.0'       # Convenient timestamping
 
+# gem 'legacy_data'
+
 group :development do
   gem 'spring'            # Keeps environment in background
   gem 'better_errors'     # Clearer error messages
