@@ -1,20 +1,39 @@
-class ProjectSerializer < ActiveModel::Serializer
-  attribute :id
-  # attribute :image
+class ProjectSerializer < ApplicationSerializer
+  has_many :goals
 
-  attribute :new_name,             key: :title
-  attribute :new_ShortDescription, key: :description
-  attribute :new_geoexplain,       key: :location
-  attribute :department_name,      key: :primary_department
-  attribute :manager_name,         key: :project_manager
-  attribute :new_Website,          key: :website
-  attribute :status,               key: :status
-  attribute :new_count,            key: :number
-
-  def image
-    object.image_small
+  # attribute :image do
+  #   object.image_small
+  # end
+  attribute :title do
+    object.new_name
+  end
+  attribute :description do
+    object.new_ShortDescription.force_encoding(Encoding::UTF_8)
+  end
+  attribute :location do
+    object.new_geoexplain
+  end
+  attribute :primary_department do
+    object.department_name
+  end
+  attribute :project_manager do
+    object.manager_name
+  end
+  attribute :website do
+    object.new_Website
+  end
+  attribute :status do
+    object.status
+  end
+  attribute :number do
+    object.new_count
   end
 
   def links
+    {
+      :self => "/#{type}/#{id}",
+      :next => object.next ? "/#{type}/#{object.next.id}" : nil,
+      :prev => object.prev ? "/#{type}/#{object.prev.id}" : nil
+    }
   end
 end
