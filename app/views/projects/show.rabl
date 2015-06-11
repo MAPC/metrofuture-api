@@ -1,65 +1,58 @@
 # object @project => :data
 
-object false
+child(@project, root: :data, object_root: false) do |project|
 
-child(@project, root: "data") do |p|
-  node :type do |p|
-    "projects"
+  # partial("projects/_project", object: @project)
+  attributes :id
+  node :type do |object|
+    object.class.to_s.downcase.underscore.pluralize
   end
-  node :id do |p|
-    p.id
-  end
-  node :attributes do |p|
+
+  node :attributes do |project|
     { 
-      title:              p.new_name,
-      # image:              p.send( locals.fetch(:image_method) { :image_full } ),
-      description:        p.new_ShortDescription.force_encoding(Encoding::UTF_8),
-      location:           p.new_geoexplain,
-      primary_department: p.department_name,
-      project_manager:    p.manager_name,
-      website:            p.new_Website,
-      status:             p.status,
-      number:             p.new_count
+      title:              project.new_name,
+      # image:            project.send( locals.fetch(:image_method) { :image_full } ),
+      description:        project.new_ShortDescription.force_encoding(Encoding::UTF_8),
+      location:           project.new_geoexplain,
+      primary_department: project.department_name,
+      project_manager:    project.manager_name,
+      website:            project.new_Website,
+      status:             project.status,
+      number:             project.new_count
     }
   end
 
-  node :links do |p|
+  # node :links, root: false do |project|
+  #   partial("projects/_links", object: project)
+  # end
+  node :links do |project|
     {
-      :self => project_url(p),
-      :next => p.next ? project_url(p.next) : nil,
-      :prev => p.prev ? project_url(p.prev) : nil
+     :self => project_url(project),
+     :next => project.next ? project_url(project.next) : nil,
+     :prev => project.prev ? project_url(project.prev) : nil
     }
   end
 
-  if params[:include] && params[:include] =~ /goal/i
-    child :relationships do
-      child :goals do |p|
-        node :links do |p|
-          { 
-            hello: p,
-            :self => project_relationship_url(:goals, p),
-            related: goals_project_url(p)
-          }
-        end
-        child @project.goals, root: :data, object_root: false do |g|
-          node :type do |g|
-            "goals"
-          end
-          node :id do |g|
-            g.id
-          end
-        end
+  node :relationships do |project|
+    node :goals do |project|
+      child(@project.goals, root: :data) do |goal|
+        partial("goals/_goal", object: goal)
       end
+      { 
+        links: {
+          :self => project_relationship_url(:goals, project_id: project),
+          related: goals_project_url(project)
+        }
+      }
     end
   end
-
 end
 
-# Eventually, we'll split the include param results by ','
-# have a show view for each type, and iterate through and
-# render each partial.
+  # Eventually, we'll split the include param results by ','
+  # have a show view for each type, and iterate through and
+  # render each partial.
 if params[:include] && params[:include] =~ /goal/i
-  child @project.goals, root: :goals, object_root: false do
+  child @project.goals, root: :included, object_root: false do
     node :type do |g|
       "goals"
     end

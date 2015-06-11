@@ -14,4 +14,3 @@ class Goal < ActiveRecord::Base
                           foreign_key:             'new_mapcgoalid',
                           association_foreign_key: 'new_mapcprojectid'
 end
-
