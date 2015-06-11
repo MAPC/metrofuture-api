@@ -1,6 +1,7 @@
 helper ApiHelper
 
 object false
+
 node(:links) do
   paginatify @projects
 end

@@ -5,6 +5,11 @@ class Project < ActiveRecord::Base
   has_one    :image, foreign_key: 'ObjectId'
   belongs_to :manager,         class_name: 'ProjectManager', foreign_key: 'OwnerId'
   belongs_to :lead_department, class_name: 'Department',     foreign_key: 'OwningBusinessUnit'
+  has_and_belongs_to_many :goals,
+                          class_name:              'Goal',
+                          join_table:              'new_new_mapcproject_goalBase',
+                          foreign_key:             'new_mapcprojectid',
+                          association_foreign_key: 'new_mapcgoalid'
 
   def manager_name
     manager.try(:Name)
