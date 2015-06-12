@@ -5,9 +5,9 @@ class Municipality < ActiveRecord::Base
   default_scope { where.not("new_TownIDMA_TownsSimplifiedMap" => nil) }
 
   has_and_belongs_to_many :projects,
-    join_table:              'new_new_project_new_municipalitiesBase',
-    foreign_key:             'new_projectid',
-    association_foreign_key: 'new_municipalitiesid'
+    join_table:              'new_new_mapcproject_municipalitiesBase',
+    foreign_key:             'new_municipalitiesid',
+    association_foreign_key: 'new_mapcprojectid'
 
   belongs_to :subregion, foreign_key: "new_MAPCSubregionId"
 end

@@ -12,8 +12,8 @@ class Project < ActiveRecord::Base
                           association_foreign_key: 'new_mapcgoalid'
   
   has_and_belongs_to_many :municipalities,
-                          join_table:              'new_new_project_new_municipalitiesBase',
-                          foreign_key:             'new_projectid',
+                          join_table:              'new_new_mapcproject_municipalitiesBase',
+                          foreign_key:             'new_mapcprojectid',
                           association_foreign_key: 'new_municipalitiesid'
 
 
