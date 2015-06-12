@@ -1,0 +1,4 @@
+https://github.com/foraker/heroku-buildpack-freetds.git
+
+https://github.com/heroku/heroku-buildpack-nodejs.git#750059cd0f
+https://github.com/heroku/heroku-buildpack-ruby.git#v138

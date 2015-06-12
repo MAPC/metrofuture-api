@@ -11,10 +11,10 @@ gem 'pg' # For test database
 # gem 'lazy_columns', github: 'jorgemanrubia/lazy_columns' # Lazy-load large columns
 
 gem 'jsonapi-serializers' # JSON API
-gem 'api-pagination'
-gem 'rmagick'  # Image processing
 gem 'kaminari' # Pagination
-gem 'rack-cors', require: 'rack/cors'
+gem 'api-pagination' # Paginates API in headers
+gem 'rmagick'  # Image processing
+gem 'rack-cors', require: 'rack/cors' # CORS Headers
 
 # Utilities
 gem 'foreman'
