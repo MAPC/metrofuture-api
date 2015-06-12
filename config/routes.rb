@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :relationships, only: [:index, :show], on: :member
     get 'goals', on: :member
   end
+  resources :municipalities, only: [:index]
+  resources :subregions,     only: [:index]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

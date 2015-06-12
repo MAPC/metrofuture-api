@@ -1,5 +1,7 @@
 class ProjectSerializer < ApplicationSerializer
   has_many :goals
+  has_many :municipalities
+  # has_many :subregions
 
   # attribute :image do
   #   object.image_small
