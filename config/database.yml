@@ -29,7 +29,7 @@ default: &default
   username:  <%= ENV.fetch('DB_USERNAME', '')                    %>
   password:  <%= ENV.fetch('DB_PASSWORD', '')                    %>
   host:      <%= ENV.fetch('DB_PORT_5432_TCP_ADDR', 'localhost') %>
-  port:      <%= ENV.fetch('DB_PORT_5432_TCP_PORT', '1443')      %>
+  port:      <%= ENV.fetch('DB_PORT_5432_TCP_PORT', '1433')      %>
   timeout: 25
 
 
