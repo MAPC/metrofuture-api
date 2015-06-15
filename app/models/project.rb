@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  self.table_name = 'new_mapcprojectBase'
+  self.table_name  = 'new_mapcprojectBase'
   self.primary_key = 'new_mapcprojectId'
 
   has_one    :image, foreign_key: 'ObjectId'
@@ -18,6 +18,16 @@ class Project < ActiveRecord::Base
   
   has_many :subregions, -> { uniq }, through: :municipalities
 
+  def self.municipality(id)
+    joins(:municipalities)
+      .where(new_new_mapcproject_municipalitiesBase: {
+               new_municipalitiesid: id
+            })
+  end
+
+  def self.subregion(id)
+    Subregion.find_by(id: id).projects # TODO: This is not good code.
+  end
 
   def manager_name
     manager.try(:Name)
