@@ -3,4 +3,6 @@ class Subregion < ActiveRecord::Base
   self.primary_key = 'new_mapcsubregionId'  
 
   default_scope { where.not("new_FullName" => nil) }
+
+  has_many :municipalities, foreign_key: "new_MAPCSubregionId"
 end

@@ -15,6 +15,8 @@ class Project < ActiveRecord::Base
                           join_table:              'new_new_mapcproject_municipalitiesBase',
                           foreign_key:             'new_mapcprojectid',
                           association_foreign_key: 'new_municipalitiesid'
+  
+  has_many :subregions, -> { uniq }, through: :municipalities
 
 
   def manager_name
