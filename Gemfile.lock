@@ -180,6 +180,7 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     vcr (2.9.3)
+    wannabe_bool (0.1.0)
     webmock (1.8.11)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
@@ -215,4 +216,5 @@ DEPENDENCIES
   stamp (= 0.6.0)
   tiny_tds
   vcr (~> 2.4)
+  wannabe_bool
   webmock (~> 1.8.4)

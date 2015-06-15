@@ -10,18 +10,19 @@ gem 'tiny_tds'
 gem 'pg' # For test database
 # gem 'lazy_columns', github: 'jorgemanrubia/lazy_columns' # Lazy-load large columns
 
-gem 'jsonapi-serializers' # JSON API
-gem 'kaminari' # Pagination
-gem 'api-pagination' # Paginates API in headers
-gem 'rmagick'  # Image processing
+# JSON API
+gem 'jsonapi-serializers' # Serialize with JSONAPI.org standard
+gem 'kaminari'            # Pagination
+gem 'api-pagination'      # Paginates API in headers
+gem 'rmagick'             # Image processing
 gem 'rack-cors', require: 'rack/cors' # CORS Headers
 
 # Utilities
 gem 'foreman'
 gem 'naught'               # Helps build null objects
 gem 'stamp', '0.6.0'       # Convenient timestamping
+gem 'wannabe_bool'         # To convert boolean-ish values to booleans
 
-# gem 'legacy_data'
 
 group :development do
   gem 'spring'            # Keeps environment in background

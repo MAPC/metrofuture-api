@@ -13,6 +13,11 @@ class ApplicationController < ActionController::API
   end
 
 
+  def filter
+    params.fetch(:filter) { {} }
+  end
+
+
   # Convenience methods for serializing models
   def serialize_model(model, options = {})
     options[:is_collection] = false
