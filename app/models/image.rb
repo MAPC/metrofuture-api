@@ -38,15 +38,15 @@ class Image < ActiveRecord::Base
   def get_image_data(x, y)
     dims = "#{x}x#{y}" # i.e. "300x200"
     logger.debug "(Redis) Trying to get cached image data for image #{self.id}"
-    data = cache.hget(dims, self.id)
-    logger.debug "(Redis) Successfully retrieved cache for image #{self.id}" if data
-    if data.nil?
+    image_data = cache.hget(dims, self.id)
+    logger.debug "(Redis) Successfully retrieved cache for image #{self.id}" if image_data
+    if image_data.nil?
       logger.debug "(Redis) Attempting to set cache for image #{self.id}"
-      data = resize(x, y)
-      set  = cache.hset(dims, self.id, data)
+      image_data = resize(x, y)
+      set  = cache.hset(dims, self.id, image_data)
       logger.debug "(Redis) Successfully set cache data for image #{self.id}." if set
     end
-    data
+    image_data
   end
 
   def clear_cache(x,y)
