@@ -26,4 +26,5 @@ COPY . /usr/src/app
 RUN bundle install
 
 EXPOSE 5000
-CMD ["foreman", "start"]
+RUN find / -name foreman
+CMD ["bundle", "exec", "foreman", "start"]
