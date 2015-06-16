@@ -28,12 +28,28 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+    CACHE_LOCK_DELAY = 2.hour.to_i # seconds
     
     def check_for_and_cache_response
+      check_for_or_reset_cache_lock
       response = ImageCache.redis.hget :responses, @_request.env["REQUEST_URI"]
       if response
-        render json: JSON.parse( response )
+        json = JSON.parse( response )
+        json[:meta] = { cache_expires: ImageCache.redis.get(:cache_lock), time: Time.now }
+        render json: json
         return false
+      end
+    end
+
+    def check_for_or_reset_cache_lock
+      unless ImageCache.redis.get :cache_lock
+        ImageCache.redis.set    :cache_lock, "#{CACHE_LOCK_DELAY.seconds.from_now}"
+        ImageCache.redis.expire :cache_lock, CACHE_LOCK_DELAY
+        # Clear the responses cache
+        ImageCache.redis.hkeys(:responses).each {|k|
+          ImageCache.redis.del :responses, k
+        }
       end
     end
 
