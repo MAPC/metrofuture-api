@@ -3,14 +3,18 @@ class ProjectSerializer < ApplicationSerializer
   has_many :municipalities
   has_many :subregions
 
-  # attribute :image do
-  #   object.image_small
-  # end
+  attribute :image do
+    if context[:is_collection]
+      object.image_small
+    else
+      object.image_full
+    end
+  end
   attribute :title do
     object.new_name
   end
   attribute :description do
-    object.new_ShortDescription.force_encoding(Encoding::UTF_8)
+    object.new_ShortDescription
   end
   attribute :location do
     object.new_geoexplain
