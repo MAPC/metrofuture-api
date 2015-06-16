@@ -13,7 +13,7 @@ ONBUILD RUN bundle install
 
 ONBUILD COPY . /usr/src/app
 
-RUN apt-get update && apt-get install -y freetds nodejs postgresql-client --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y freetds-dev nodejs postgresql-client --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 5000
 CMD ["foreman", "start"]
