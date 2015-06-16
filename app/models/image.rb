@@ -16,18 +16,42 @@ class Image < ActiveRecord::Base
     "data:#{ mime_type };base64,#{ body }"
   end
 
+  def cache
+    ImageCache.redis
+  end
+
+  def resize(x,y)
+    i = Magick::Image.read_inline(data)[0]
+    resized_image  = i.resize_to_fill( x, y )
+    new_image_data = Base64.encode64 resized_image.to_blob
+    "data:#{ mime_type };base64,#{ new_image_data }"
+  end
+
   def full
-    i = Magick::Image.read_inline(data).first
-    i = i.resize_to_fill( 1200, 800 )
-    new_body = Base64.encode64 i.to_blob
-    "data:#{ mime_type };base64,#{ new_body }"
+    get_image_data 1200, 800
   end
 
   def small
-    i = Magick::Image.read_inline(data).first
-    i = i.resize_to_fill( 300, 200 )
-    new_body = Base64.encode64 i.to_blob
-    "data:#{ mime_type };base64,#{ new_body }"
+    get_image_data 300, 200
+  end
+
+  def get_image_data(x, y)
+    dims = "#{x}x#{y}" # i.e. "300x200"
+    logger.debug "(Redis) Trying to get cached image data for image #{self.id}"
+    data = cache.hget(dims, self.id)
+    logger.debug "(Redis) Successfully retrieved cache for image #{self.id}" if data
+    if data.nil?
+      logger.debug "(Redis) Attempting to set cache for image #{self.id}"
+      data = resize(x, y)
+      set  = cache.hset(dims, self.id, data)
+      logger.debug "(Redis) Successfully set cache data for image #{self.id}." if set
+    end
+    data
+  end
+
+  def clear_cache(x,y)
+    dims = "#{x}x#{y}" # i.e. "300x200"
+    cache.hkeys(dims).each {|key| cache.hdel key }
   end
 
 end

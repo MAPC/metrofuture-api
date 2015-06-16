@@ -138,6 +138,7 @@ GEM
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    redis (3.2.1)
     rmagick (2.15.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -209,6 +210,7 @@ DEPENDENCIES
   rails (= 4.1.0)
   rails-api
   rails-erd
+  redis
   rmagick
   rspec-rails (~> 2.14.0)
   spring

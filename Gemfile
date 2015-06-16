@@ -14,8 +14,9 @@ gem 'pg' # For test database
 gem 'jsonapi-serializers' # Serialize with JSONAPI.org standard
 gem 'kaminari'            # Pagination
 gem 'api-pagination'      # Paginates API in headers
-gem 'rmagick'             # Image processing
 gem 'rack-cors', require: 'rack/cors' # CORS Headers
+gem 'rmagick'             # Image processing
+gem 'redis'               # Image caching
 
 # Utilities
 gem 'foreman'
