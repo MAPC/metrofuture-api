@@ -22,8 +22,8 @@ RUN find / -name tsql
 RUN echo $PATH
 RUN echo $LD_LIBRARY_PATH
 
-COPY . /usr/src/app
 RUN bundle install
+COPY . /usr/src/app
 
 EXPOSE 5000
 RUN find / -name foreman

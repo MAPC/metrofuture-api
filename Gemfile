@@ -7,7 +7,6 @@ gem 'rails-api'
 
 gem 'activerecord-sqlserver-adapter', '4.1.0'
 gem 'tiny_tds'
-gem 'pg' # For test database
 # gem 'lazy_columns', github: 'jorgemanrubia/lazy_columns' # Lazy-load large columns
 
 # JSON API
@@ -20,8 +19,6 @@ gem 'redis'               # Image caching
 
 # Utilities
 gem 'foreman'
-gem 'naught'               # Helps build null objects
-gem 'stamp', '0.6.0'       # Convenient timestamping
 gem 'wannabe_bool'         # To convert boolean-ish values to booleans
 
 
@@ -33,6 +30,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pg' # For test database
   gem 'rspec-rails',        '~> 2.14.0' # Stick to a specific version
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'factory_girl_rails',    '~> 4.0' # Build factories quickly
