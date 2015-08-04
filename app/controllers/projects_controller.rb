@@ -16,39 +16,39 @@ class ProjectsController < ApplicationController
 
     json = JSONAPI::Serializer.serialize(@projects, include: includes, is_collection: true, context: {is_collection: true})
     json[:links] = paginate(@projects)
-    ImageCache.redis.hset :responses, @_request.env["REQUEST_URI"], JSON.generate( json )
+    DataCache.hset :responses, @_request.env["REQUEST_URI"], JSON.generate( json )
     render json: json
   end
 
   def show
     @project = Project.find params[:id]
     json = JSONAPI::Serializer.serialize(@project, include: includes, is_collection: false)
-    ImageCache.redis.hset :responses, @_request.env["REQUEST_URI"], JSON.generate( json )
+    DataCache.hset :responses, @_request.env["REQUEST_URI"], JSON.generate( json )
     render json: json
   end
 
   private
 
     CACHE_LOCK_DELAY = 2.hour.to_i # seconds
-    
+
     def check_for_and_cache_response
       check_for_or_reset_cache_lock
-      response = ImageCache.redis.hget :responses, @_request.env["REQUEST_URI"]
+      response = DataCache.hget :responses, @_request.env["REQUEST_URI"]
       if response
         json = JSON.parse( response )
-        json[:meta] = { cache_expires: ImageCache.redis.get(:cache_lock), time: Time.now }
+        json[:meta] = { cache_expires: DataCache.get(:cache_lock), time: Time.now }
         render json: json
         return false
       end
     end
 
     def check_for_or_reset_cache_lock
-      unless ImageCache.redis.get :cache_lock
-        ImageCache.redis.set    :cache_lock, "#{CACHE_LOCK_DELAY.seconds.from_now}"
-        ImageCache.redis.expire :cache_lock, CACHE_LOCK_DELAY
+      unless DataCache.get :cache_lock
+        DataCache.set    :cache_lock, "#{CACHE_LOCK_DELAY.seconds.from_now}"
+        DataCache.expire :cache_lock, CACHE_LOCK_DELAY
         # Clear the responses cache
-        ImageCache.redis.hkeys(:responses).each {|k|
-          ImageCache.redis.del :responses, k
+        DataCache.hkeys(:responses).each {|k|
+          DataCache.del :responses, k
         }
       end
     end

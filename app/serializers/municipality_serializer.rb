@@ -22,4 +22,12 @@ class MunicipalitySerializer < ApplicationSerializer
   attribute :rpa do
     object.new_RegionalPlanningAgency
   end
+
+  attribute :project_count do
+    object.project_count.to_i
+  end
+
+  attribute :geojson do
+    object.to_geojson
+  end
 end

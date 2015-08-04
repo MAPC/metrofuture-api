@@ -4,7 +4,7 @@ class Image < ActiveRecord::Base
 
   belongs_to :project, foreign_key: "ObjectId"
 
-  default_scope { 
+  default_scope {
     where("IsDocument" => true)       # Is an image
     .where("ObjectTypeCode" => 10056) # Associated to a project
   }
@@ -17,7 +17,7 @@ class Image < ActiveRecord::Base
   end
 
   def cache
-    ImageCache.redis
+    DataCache
   end
 
   def resize(x,y)

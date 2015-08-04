@@ -19,8 +19,8 @@ gem 'redis'               # Image caching
 
 # Utilities
 gem 'foreman'
-gem 'wannabe_bool'         # To convert boolean-ish values to booleans
-
+gem 'wannabe_bool'        # Convert boolean-ish values to booleans
+gem 'httparty'            # HTTP requests
 
 group :development do
   gem 'spring'            # Keeps environment in background
