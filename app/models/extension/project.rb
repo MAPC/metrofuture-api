@@ -1,7 +1,6 @@
 class Extension::Project < ActiveRecord::Base
   self.table_name = 'new_mapcprojectExtensionBase'
   self.primary_key = 'new_mapcprojectId'
-  include SimplePrimaryKey
 
   belongs_to :base, class_name: 'Project', foreign_key: 'new_mapcprojectId'
 
@@ -11,9 +10,9 @@ class Extension::Project < ActiveRecord::Base
 
   STATUS = {  100000000 => 'Proposed',
               100000001 => 'In Progress',
-              100000002 => 'Completed', 
+              100000002 => 'Completed',
               100000003 => 'In Development'  }
-              
+
   def status
     STATUS.fetch(new_ProjectStatus) { nil }
   end

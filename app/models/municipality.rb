@@ -52,7 +52,7 @@ class Municipality < ActiveRecord::Base
     # Project Count
 
     def set_cached_project_count
-      count = projects.count
+      count = self.projects.count
       DataCache.hset :project_count, id, count
       count
     end
