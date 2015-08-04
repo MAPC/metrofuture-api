@@ -24,7 +24,7 @@ class MunicipalitySerializer < ApplicationSerializer
   end
 
   attribute :project_count do
-    object.project_count.to_i
+    object.project_count
   end
 
   attribute :geojson do

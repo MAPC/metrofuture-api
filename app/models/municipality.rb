@@ -33,12 +33,14 @@ class Municipality < ActiveRecord::Base
 
   def project_count
     # If the project count hasn't expired, get and/or set it
+    count = 0
     if DataCache.get count_ttl_key
-      DataCache.hget(:project_count, id) || set_cached_project_count
+      count = DataCache.hget(:project_count, id) || set_cached_project_count
     else # if the cache has expired, set and delay it
-      set_cached_project_count
+      count = set_cached_project_count
       set_cache_value_and_expiration
     end
+    count.to_i
   end
 
   def count_ttl_key
@@ -77,7 +79,7 @@ class Municipality < ActiveRecord::Base
     def retrieve_geojson
       begin
         HTTParty.get(geometry_base_url, timeout: TIMEOUT).body
-      rescue Net::ReadTimeout
+      rescue
         "{}"
       end
     end
