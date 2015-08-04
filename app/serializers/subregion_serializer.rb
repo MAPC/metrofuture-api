@@ -6,4 +6,8 @@ class SubregionSerializer < ApplicationSerializer
   attribute :abbv do
     object.new_MAPC_Subregion
   end
+
+  attribute :project_count do
+    object.project_count
+  end
 end

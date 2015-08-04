@@ -26,8 +26,8 @@ module DataCache
     data.hkeys(key)
   end
 
-  def self.del(key, field)
-    data.del(key, field)
+  def self.del(key)
+    data.del(key)
   end
 
   def self.expire(key, seconds)
