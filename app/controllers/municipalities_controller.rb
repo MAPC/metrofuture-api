@@ -1,8 +1,8 @@
 class MunicipalitiesController < ApplicationController
   def index
-    metrofuture = filter.fetch(:mapc) { false }
+    mapc = filter.fetch(:mapc) { false }
 
-    @munis = Municipality.metrofuture( metrofuture )
+    @munis = Municipality.mapc( mapc )
     json = JSONAPI::Serializer.serialize(@munis, include: includes, is_collection: true)
     render json: json
   end

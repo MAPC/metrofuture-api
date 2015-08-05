@@ -8,6 +8,14 @@ class Municipality < ActiveRecord::Base
     boolean.to_b ? where("new_MetroFuture" => true) : all
   end
 
+  def self.mapc(boolean)
+    if boolean.to_b
+      where("new_RegionalPlanningAgency" => "Metropolitan Area Planning Council")
+    else
+      all
+    end
+  end
+
   has_and_belongs_to_many :projects,
     join_table:              'new_new_mapcproject_municipalitiesBase',
     foreign_key:             'new_municipalitiesid',
