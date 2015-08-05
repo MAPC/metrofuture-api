@@ -9,7 +9,7 @@ class Image < ActiveRecord::Base
     .where("ObjectTypeCode" => 10056) # Associated to a project
   }
 
-  alias_attribute :filename, "FileName"
+  alias_attribute :filename,  "FileName"
   alias_attribute :mime_type, "MimeType"
   alias_attribute :body, "DocumentBody"
 
@@ -24,8 +24,8 @@ class Image < ActiveRecord::Base
     style ? base_path << "?style=#{style}" : base_path
   end
 
-  def content(style=:small)
-    resize_image styles[style.to_sym]
+  def content(style=nil)
+    style ? resize_image( styles[style.to_sym] ) : body
   end
 
   def styles
