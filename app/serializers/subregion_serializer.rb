@@ -10,4 +10,8 @@ class SubregionSerializer < ApplicationSerializer
   attribute :project_count do
     object.project_count
   end
+
+  attribute :geojson do
+    object.to_geojson
+  end
 end

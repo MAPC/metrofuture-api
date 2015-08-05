@@ -2,9 +2,6 @@ class Municipality < ActiveRecord::Base
   self.table_name  = 'new_municipalitiesExtensionBase'
   self.primary_key = 'new_municipalitiesId'
 
-  TIMEOUT = 3 # seconds
-  PROJECT_COUNT_TTL = 1.week.to_i
-
   default_scope { where.not("new_TownIDMA_TownsSimplifiedMap" => nil) }
 
   def self.metrofuture(boolean)
