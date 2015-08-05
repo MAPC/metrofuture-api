@@ -36,11 +36,21 @@ class Image < ActiveRecord::Base
     }
   end
 
+  def expire_cache
+    styles.each_pair do |k,v|
+      ImageCacher.new(self, hash_key: dimension_string(v)).expire!
+    end
+  end
+
   def resize_image(dimensions)
     # Not a fan of this code, the way it goes to text here
     # and then in the ImageCacher goes back to Array.
-    dims = "#{dimensions.first}x#{dimensions.last}" # i.e. "300x200"
+    dims = dimension_string(dimensions) # i.e. "300x200"
     @image ||= ImageCacher.new(self, hash_key: dims).value
+  end
+
+  def dimension_string(dimensions_array)
+    "#{dimensions_array.first}x#{dimensions_array.last}"
   end
 
 end
