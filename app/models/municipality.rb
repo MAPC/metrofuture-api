@@ -14,6 +14,7 @@ class Municipality < ActiveRecord::Base
     association_foreign_key: 'new_mapcprojectid'
 
   belongs_to :subregion, foreign_key: "new_MAPCSubregionId"
+  # TODO: Has one image
 
   alias_attribute :geoid, :new_GeoID
 

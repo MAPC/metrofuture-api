@@ -1,7 +1,8 @@
 class BaseCacher
 
-  def initialize(object)
+  def initialize(object, options={})
     @object = object
+    @options = options
   end
 
   def live_value
@@ -16,6 +17,7 @@ class BaseCacher
   end
 
   def converter
+    # Not required.
     # Symbol representation of a method to run after the
     # value is returned from Redis.
     # For example, `:to_i`
@@ -25,8 +27,16 @@ class BaseCacher
     nil
   end
 
+  def update_cache_condition
+    # Not required.
+    # A conditional to determine w
+    # Returning `true` will update the cache. Returning `false` will
+    # use the cached value, unless the cached value is expired.
+    false
+  end
+
   def value
-    if expired?
+    if expired? || update_cache_condition
       value = live_value
       cache.hset hash_key, hash_field, value
       unexpire!
@@ -42,11 +52,12 @@ class BaseCacher
 
   def hash_key
     # The name of the hash.
-    self.class.to_s.underscore
+    @options.fetch(:hash_key) { self.class.to_s.underscore }
   end
 
   def hash_field
-    @object.id
+    field_suffix = @options.fetch(:field_suffix) { nil }
+    "#{@object.id}#{field_suffix}"
   end
 
   def clear_cache
