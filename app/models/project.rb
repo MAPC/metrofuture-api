@@ -37,16 +37,8 @@ class Project < ActiveRecord::Base
     lead_department.try(:Name)
   end
 
-  def image_data
-    image.try(:data)
-  end
-
-  def image_small
-    image.try(:small)
-  end
-
-  def image_full
-    image.try(:full)
+  def image_url(style=nil)
+    image.url(style) if image
   end
 
   has_one :extension, class_name: 'Extension::Project', foreign_key: 'new_mapcprojectId'

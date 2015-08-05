@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   include ApiHelper
-  before_filter :check_for_and_cache_response
+  # before_filter :check_for_and_cache_response
 
   def index
     muni_id = filter.fetch(:municipalities) { nil }
@@ -16,14 +16,14 @@ class ProjectsController < ApplicationController
 
     json = JSONAPI::Serializer.serialize(@projects, include: includes, is_collection: true, context: {is_collection: true})
     json[:links] = paginate(@projects)
-    DataCache.hset :responses, @_request.env["REQUEST_URI"], JSON.generate( json )
+    # DataCache.hset :responses, @_request.env["REQUEST_URI"], JSON.generate( json )
     render json: json
   end
 
   def show
     @project = Project.find params[:id]
     json = JSONAPI::Serializer.serialize(@project, include: includes, is_collection: false)
-    DataCache.hset :responses, @_request.env["REQUEST_URI"], JSON.generate( json )
+    # DataCache.hset :responses, @_request.env["REQUEST_URI"], JSON.generate( json )
     render json: json
   end
 
@@ -54,3 +54,20 @@ class ProjectsController < ApplicationController
     end
 
 end
+
+
+=begin
+
+Logic:
+
+- We cache responses with their URLs in order to avoid database query time, mostly for image data
+- If images are fast / loaded separately, do we really need to cache these responses anymore?
+- If we do, we should invalidate the cache when
+    - The IDs for a given page are different from the expected IDs
+    - The projects have been updated since the cache was set (ModifiedOn < expires_at)
+- We can set the expiring key's value to the set of sorted ids (or a hash of this).
+  - For a precondition, we check the sorted ids against the expire key's value.
+
+
+
+=end

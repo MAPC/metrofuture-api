@@ -37,10 +37,12 @@ class BaseCacher
 
   def value
     if expired? || update_cache_condition
+      Rails.logger.debug "Image #{@object.id} retrieved live"
       value = live_value
       cache.hset hash_key, hash_field, value
       unexpire!
     else
+      Rails.logger.debug "Image #{@object.id} retrieved from cache"
       value = cache.hget hash_key, hash_field
     end
     converter ? value.send(converter) : value
