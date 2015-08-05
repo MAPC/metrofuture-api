@@ -5,17 +5,17 @@ class Project < ActiveRecord::Base
   has_one    :image, foreign_key: 'ObjectId'
   belongs_to :manager,         class_name: 'ProjectManager', foreign_key: 'OwnerId'
   belongs_to :lead_department, class_name: 'Department',     foreign_key: 'OwningBusinessUnit'
-  
+
   has_and_belongs_to_many :goals,
                           join_table:              'new_new_mapcproject_goalBase',
                           foreign_key:             'new_mapcprojectid',
                           association_foreign_key: 'new_mapcgoalid'
-  
+
   has_and_belongs_to_many :municipalities,
                           join_table:              'new_new_mapcproject_municipalitiesBase',
                           foreign_key:             'new_mapcprojectid',
                           association_foreign_key: 'new_municipalitiesid'
-  
+
   has_many :subregions, -> { uniq }, through: :municipalities
 
   def self.municipality(id)
@@ -48,10 +48,13 @@ class Project < ActiveRecord::Base
   def image_full
     image.try(:full)
   end
-  
+
   has_one :extension, class_name: 'Extension::Project', foreign_key: 'new_mapcprojectId'
-  
-  default_scope { includes(:extension).where("new_mapcprojectExtensionBase.new_Showonwebsite" => true).order("new_mapcprojectExtensionBase.new_count DESC") }
+
+  default_scope { includes(:extension)
+    .where("new_mapcprojectExtensionBase.new_Showonwebsite" => true)
+    .where("statecode" => 0)
+    .order("new_mapcprojectExtensionBase.new_count DESC") }
 
   def method_missing(method_name, *args, &block)
     self.extension.send(method_name)
