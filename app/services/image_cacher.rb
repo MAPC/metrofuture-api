@@ -1,12 +1,7 @@
 class ImageCacher < BaseCacher
   def live_value
-    dims = @options.fetch(:hash_key) { nil }
-    if dims
-      d = dims.split("x").map(&:to_i) # "300x200" => [300, 200]
-      resize(d[0], d[1])
-    else
-      @object.body
-    end
+    style = @options.fetch(:style) { nil }
+    @object.resize(style)
   end
 
   def update_cache_condition
@@ -18,12 +13,8 @@ class ImageCacher < BaseCacher
     1.week.to_i
   end
 
-  private
-
-    def resize(x, y)
-      image_data    = Magick::Image.read_inline(@object.data).first
-      resized_image = image_data.resize_to_fill(x, y)
-      Base64.encode64 resized_image.to_blob
-    end
+  def converter
+    # :to_bn
+  end
 
 end

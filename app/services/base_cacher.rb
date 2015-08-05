@@ -36,13 +36,27 @@ class BaseCacher
   end
 
   def value
+    # This could use some refactoring, but what it does, is:
+    # if the cache somehow ends up being nil, this will revert
+    # to the live value.
+    return_value = internal_value
+    if return_value.nil?
+      expire!
+      return_value = internal_value
+    end
+    return_value
+  end
+
+  def internal_value
     if expired? || update_cache_condition
+      # TODO: Factor this out into a method
       Rails.logger.debug "Image #{@object.id} retrieved live"
       value = live_value
       cache.hset hash_key, hash_field, value
       unexpire!
     else
-      Rails.logger.debug "Image #{@object.id} retrieved from cache"
+      # TODO: Factor this out into a method
+      Rails.logger.debug "Image #{@object.id} retrieved from cache. Clear with hdel #{hash_key} #{hash_field}"
       value = cache.hget hash_key, hash_field
     end
     converter ? value.send(converter) : value

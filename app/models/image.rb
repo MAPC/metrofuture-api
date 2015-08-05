@@ -13,19 +13,32 @@ class Image < ActiveRecord::Base
   alias_attribute :mime_type, "MimeType"
   alias_attribute :body, "DocumentBody"
 
-  def data
-    "data:#{ mime_type };base64,#{ body }"
-  end
-
   # TODO This shouldn't be in the model because it's
-  # routing logic, not model logic.
+  # routing logic, not model logic. Perhaps a mixin
+  # of some sort. Maybe look at Paperclip's design.
   def url(style=nil)
     base_path = "/images/#{filename}"
     style ? base_path << "?style=#{style}" : base_path
   end
 
   def content(style=nil)
-    style ? resize_image( styles[style.to_sym] ) : body
+    ImageCacher.new(self, hash_key: hash_key(style), style: style).value
+  end
+
+  def hash_key(style)
+    style || "nil"
+  end
+
+  def binary(style=nil)
+    Base64.decode64 content(style)
+  end
+
+  def data(style=nil)
+    "data:#{ mime_type };base64,#{ content(style) }"
+  end
+
+  def raw_data
+    "data:#{ mime_type };base64,#{ body }"
   end
 
   def styles
@@ -36,21 +49,15 @@ class Image < ActiveRecord::Base
     }
   end
 
-  def expire_cache
-    styles.each_pair do |k,v|
-      ImageCacher.new(self, hash_key: dimension_string(v)).expire!
+  def resize(style)
+    if style
+      dimensions = styles[style.to_sym]
+      base64 = Magick::Image.read_inline(raw_data).first
+      resized_image = base64.resize_to_fill(dimensions.first, dimensions.last)
+      Base64.encode64 resized_image.to_blob
+    else
+      body
     end
-  end
-
-  def resize_image(dimensions)
-    # Not a fan of this code, the way it goes to text here
-    # and then in the ImageCacher goes back to Array.
-    dims = dimension_string(dimensions) # i.e. "300x200"
-    @image ||= ImageCacher.new(self, hash_key: dims).value
-  end
-
-  def dimension_string(dimensions_array)
-    "#{dimensions_array.first}x#{dimensions_array.last}"
   end
 
 end

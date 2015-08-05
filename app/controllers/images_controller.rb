@@ -6,11 +6,9 @@ class ImagesController < ApplicationController
 
     @image = Image.find_by(:FileName => filename)
 
-    send_data Base64.decode64( @image.content(style) ),
+    send_data      @image.binary(style),
       type:        @image.MimeType,
       filename:    @image.FileName,
       disposition: 'inline'
   end
-
-
 end
