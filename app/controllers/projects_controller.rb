@@ -5,13 +5,12 @@ class ProjectsController < ApplicationController
     muni_id = filter.fetch(:municipalities) { nil }
     subr_id = filter.fetch(:subregions)     { nil }
 
-    # Why aren't we getting projects from the Municipality or Subregion model?
     if muni_id
-      @projects = Municipality.find(muni_id).projects.page(page_number).per(per_page)
-      # @projects = Project.municipality(muni_id).page(page_number).per(per_page)
+      @projects = Project.municipality(muni_id).page(page_number).per(per_page)
     elsif subr_id
-      @projects = Subregion.find(subr_id).projects.page(page_number).per(per_page)
-      # @projects = Project.subregion(subr_id).page(page_number).per(per_page)
+      @projects = Kaminari.paginate_array(
+        Subregion.find(subr_id).projects
+      ).page(page_number).per(per_page)
     else
       @projects = Project.all.page(page_number).per(per_page)
     end

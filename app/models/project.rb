@@ -25,12 +25,6 @@ class Project < ActiveRecord::Base
             })
   end
 
-  def self.subregion(id)
-    # TODO: This is not good code.
-    s = Subregion.find(id)
-    s.projects if s # TODO: Fix smell -- Nil Check
-  end
-
   def manager_name
     manager.try(:Name)
   end
