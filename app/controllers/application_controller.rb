@@ -1,22 +1,20 @@
 class ApplicationController < ActionController::API
 
-  def includes
-    params[:include] ? ( params[:include].split(',') ) : []
-  end
-  
-  def page_number
-    params[:page] ? ( params[:page][:number] || 1 ) : 1
-  end
-  
-  def per_page
-    params[:page] ? ( params[:page][:size]   || Kaminari.config.default_per_page ) : Kaminari.config.default_per_page
-  end
-
-
   def filter
     params.fetch(:filter) { {} }
   end
 
+  def includes
+    params[:include] ? ( params[:include].split(',') ) : []
+  end
+
+  def page_number
+    params[:page] ? ( params[:page][:number] || 1 ) : 1
+  end
+
+  def per_page
+    params[:page] ? ( params[:page][:size]   || Kaminari.config.default_per_page ) : Kaminari.config.default_per_page
+  end
 
   # Convenience methods for serializing models
   def serialize_model(model, options = {})
