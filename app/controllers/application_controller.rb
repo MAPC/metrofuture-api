@@ -1,19 +1,23 @@
 class ApplicationController < ActionController::API
 
+  DEFAULT_PER_PAGE = Kaminari.config.default_per_page
+  DEFAULT_PAGE_NUM = 1
+
   def filter
     params.fetch(:filter) { {} }
   end
 
   def includes
-    params[:include] ? ( params[:include].split(',') ) : []
+    params.fetch(:include, "").split(',')
   end
 
   def page_number
-    params[:page] ? ( params[:page][:number] || 1 ) : 1
+    page.fetch(:number) { DEFAULT_PAGE_NUM }
   end
 
+  # TODO: Factor out this duplicate logic (also in ApiHelper)
   def per_page
-    params[:page] ? ( params[:page][:size]   || Kaminari.config.default_per_page ) : Kaminari.config.default_per_page
+    page.fetch(:size) { DEFAULT_PER_PAGE }
   end
 
   # Convenience methods for serializing models
@@ -28,4 +32,10 @@ class ApplicationController < ActionController::API
     options[:includes] = includes
     JSONAPI::Serializer.serialize(models, options)
   end
+
+  private
+
+    def page
+      params.fetch(:page) { Hash.new }
+    end
 end

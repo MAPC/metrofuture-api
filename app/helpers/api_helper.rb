@@ -50,6 +50,7 @@ module ApiHelper
     }))
   end
 
+  # TODO: Factor out this duplicate logic (also in ApplicationController)
   def page_size
     params[:page] ? ( params[:page][:size] || Kaminari.config.default_per_page ) : Kaminari.config.default_per_page
   end
