@@ -23,7 +23,10 @@ class Subregion < ActiveRecord::Base
 
   def to_geojson
     @geojson ||= JSON.parse( SubregionGeojsonCacher.new(self).value )
-    @geojson["properties"]["project_count"] = project_count
+    props = @geojson["properties"]
+    props["id"] = id
+    props["project_count"] = project_count
+    props["simple_name"] = name
     @geojson
   end
 end
