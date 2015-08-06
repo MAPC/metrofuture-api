@@ -46,6 +46,7 @@ class Municipality < ActiveRecord::Base
     props = @geojson["properties"]
     props["id"] = id
     props["project_count"] = project_count
+    props["simple_name"] = name
     @geojson
   end
 
