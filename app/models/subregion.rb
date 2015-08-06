@@ -3,8 +3,16 @@ class Subregion < ActiveRecord::Base
   self.primary_key = 'new_mapcsubregionId'
 
   alias_attribute :name, :new_FullName
+  alias_attribute :abbv, :new_MAPC_Subregion
 
-  default_scope { where.not("new_FullName" => nil) }
+  default_scope {
+    where.not("new_MAPC_Subregion" => "Not applicable")
+      .where.not("new_MAPC_Subregion" => "All subregions")
+  }
+
+  def self.simple(boolean=true)
+    boolean.to_b ? where("new_Organization" => nil) : all
+  end
 
   has_many :municipalities, foreign_key: "new_MAPCSubregionId"
   has_many :projects, through: :municipalities

@@ -1,7 +1,13 @@
 class SubregionGeojsonCacher < BaseCacher
+
+  NULL_GEOJSON = { "geojson" => "{} "}
+
   def live_value
     @fixtures ||= YAML.load_file('db/fixtures/subregions.yml')
-    geojson = @fixtures['subregions'][@object.id]["geojson"]
+    subregion = @fixtures['subregions'].fetch(@object.id) {
+      NULL_GEOJSON # Compound subregions have no GeoJSON
+    }
+    geojson = subregion["geojson"]
     json = ensure_properties JSON.parse(geojson)
     json.to_json
   end
