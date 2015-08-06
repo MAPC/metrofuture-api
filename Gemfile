@@ -23,6 +23,7 @@ gem 'wannabe_bool'        # Convert boolean-ish values to booleans
 gem 'httparty'            # HTTP requests
 
 group :development do
+  gem 'byebug'
   gem 'spring'            # Keeps environment in background
   gem 'better_errors'     # Clearer error messages
   gem 'binding_of_caller' # Error message REPL & more
