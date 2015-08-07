@@ -25,7 +25,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find params[:id]
+    count, _sep, slug = params[:id].partition('-')
+    @project = Project.where("new_mapcprojectExtensionBase.new_count" => count).first
     json = JSONAPI::Serializer.serialize(@project, include: includes, is_collection: false)
     render json: json
   end

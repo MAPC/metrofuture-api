@@ -3,6 +3,10 @@ class ProjectSerializer < ApplicationSerializer
   has_many :municipalities
   has_many :subregions
 
+  def id
+    object.to_param.to_s
+  end
+
   attribute :image do
     if context[:is_collection]
       object.image_url(:small)
@@ -45,9 +49,9 @@ class ProjectSerializer < ApplicationSerializer
 
   def links
     {
-      :self => "/#{type}/#{id}",
-      :next => object.next ? "/#{type}/#{object.next.id}" : nil,
-      :prev => object.prev ? "/#{type}/#{object.prev.id}" : nil
+      :self => "/#{type}/#{object.to_param}",
+      :next => object.next ? "/#{type}/#{object.next.to_param}" : nil,
+      :prev => object.prev ? "/#{type}/#{object.prev.to_param}" : nil
     }
   end
 end

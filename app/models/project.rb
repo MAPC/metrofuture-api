@@ -17,6 +17,26 @@ class Project < ActiveRecord::Base
                           association_foreign_key: 'new_municipalitiesid'
 
   has_many :subregions, -> { uniq }, through: :municipalities
+  has_one :extension, class_name: 'Extension::Project', foreign_key: 'new_mapcprojectId'
+
+  default_scope { includes(:extension)
+    .where("new_mapcprojectExtensionBase.new_Showonwebsite" => true)
+    .where("statecode" => 0)
+    .order("new_mapcprojectExtensionBase.new_count DESC") }
+
+  def name
+    extension.new_name
+  end
+
+  def count
+    extension.new_count
+  end
+
+  def to_param
+    "#{count}-#{name.to_s.parameterize}"
+  end
+
+  alias_method :title, :name
 
   def self.municipality(id)
     joins(:municipalities)
@@ -36,13 +56,6 @@ class Project < ActiveRecord::Base
   def image_url(style=nil)
     image.url(style) if image
   end
-
-  has_one :extension, class_name: 'Extension::Project', foreign_key: 'new_mapcprojectId'
-
-  default_scope { includes(:extension)
-    .where("new_mapcprojectExtensionBase.new_Showonwebsite" => true)
-    .where("statecode" => 0)
-    .order("new_mapcprojectExtensionBase.new_count DESC") }
 
   def method_missing(method_name, *args, &block)
     self.extension.send(method_name)
