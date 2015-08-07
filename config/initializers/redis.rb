@@ -30,6 +30,10 @@ module DataCache
     data.del(key)
   end
 
+  def self.hdel(key, field)
+    data.hdel(key, field)
+  end
+
   def self.expire(key, seconds)
     data.expire(key, seconds)
   end
