@@ -40,7 +40,7 @@ class BaseCacher
     # if the cache somehow ends up being nil, this will revert
     # to the live value.
     return_value = internal_value
-    if return_value.nil?
+    if return_value.nil? # TODO: Fix smell - Nil Check
       expire!
       return_value = internal_value
     end
@@ -62,7 +62,12 @@ class BaseCacher
     converter ? value.send(converter) : value
   end
 
+  # TODO: Remove this, and make all calls to cache => self.cache
   def cache
+    DataCache
+  end
+
+  def self.cache
     DataCache
   end
 
@@ -71,14 +76,22 @@ class BaseCacher
     @options.fetch(:hash_key) { self.class.to_s.underscore }
   end
 
+  # TODO: Sloppy and duplicative! There's design to be done!
+  def self.hash_key
+    name.to_s.underscore
+  end
+
   def hash_field
     field_suffix = @options.fetch(:field_suffix) { nil }
     "#{@object.id}#{field_suffix}"
   end
 
-  def clear_cache
-    cache.hdel hash_key, hash_field
-    expire!
+  def self.clear_all
+    cache.hkeys(self.hash_key).each { |field|
+      cache.hdel self.hash_key, field
+    }
+    # expire! happens in #value later on
+    # TODO But this should not be the code forever
   end
 
   def expired?
