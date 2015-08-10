@@ -45,16 +45,14 @@ class Project < ActiveRecord::Base
             })
   end
 
+  # TODO: Extract display logic into view object
   def manager_name
-    manager.try(:Name)
+    manager ? manager.name : ""
   end
 
+  # TODO: Extract display logic into view object
   def department_name
-    if lead_department
-      lead_department.Name
-    else
-      "MAPC"
-    end
+    lead_department ? lead_department.Name : "MAPC"
   end
 
   def department_short_name
