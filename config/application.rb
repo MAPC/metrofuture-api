@@ -26,11 +26,21 @@ module MetrofutureServer
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
+
+    DEFAULT_DEBUG_CORS = false
+    DEFAULT_PRODUCTION_ORIGIN = 'projects.metrofuture.org'
+
+    ALLOW_ALL   = '*'
+    KNOWN_HOSTS = ENV.fetch('KNOWN_HOSTS') { DEFAULT_PRODUCTION_ORIGIN }
+    DEBUG_CORS  = ENV.fetch('DEBUG_CORS')  { DEFAULT_DEBUG_CORS }
+    ORIGINS     = (Rails.env == 'production') ? KNOWN_HOSTS : ALLOW_ALL
+
+    config.middleware.insert_before 0, "Rack::Cors", debug: DEBUG_CORS, logger: (-> { Rails.logger }) do
       allow do
-        origins  '*'
-        resource '*', headers: :any, methods: :get
+        origins  ORIGINS.split(',')
+        resource ALLOW_ALL, headers: :any, methods: :get
       end
     end
+
   end
 end
