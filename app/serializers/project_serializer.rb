@@ -31,6 +31,10 @@ class ProjectSerializer < ApplicationSerializer
     object.department_name
   end
 
+  attribute :primary_department_short do
+    object.department_short_name
+  end
+
   attribute :project_manager do
     object.manager_name
   end

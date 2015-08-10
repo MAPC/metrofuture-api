@@ -50,7 +50,15 @@ class Project < ActiveRecord::Base
   end
 
   def department_name
-    lead_department.try(:Name)
+    if lead_department
+      lead_department.Name
+    else
+      "MAPC"
+    end
+  end
+
+  def department_short_name
+    shortname_for(department_name)
   end
 
   def image_url(style=nil)
@@ -60,4 +68,17 @@ class Project < ActiveRecord::Base
   def method_missing(method_name, *args, &block)
     self.extension.send(method_name)
   end
+
+  private
+    SHORTNAMES = {
+      "Land Use Division" => "Land Use",
+      "Transportation Division" => "Transportation",
+      "Regional Plan Implementation" => "RPI",
+      "Government Affairs" => "Gov. Affairs",
+      "Municipal Governance" => "Muni. Governance"
+    }
+
+    def shortname_for(name)
+      SHORTNAMES[name] || name
+    end
 end
