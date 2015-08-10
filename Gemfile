@@ -5,9 +5,9 @@ ruby '2.1.5'
 gem 'rails', '4.1.0'
 gem 'rails-api'
 
+# Database connection
 gem 'activerecord-sqlserver-adapter', '4.1.0'
 gem 'tiny_tds'
-# gem 'lazy_columns', github: 'jorgemanrubia/lazy_columns' # Lazy-load large columns
 
 # JSON API
 gem 'jsonapi-serializers' # Serialize with JSONAPI.org standard
