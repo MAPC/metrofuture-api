@@ -48,7 +48,7 @@ class Municipality < ActiveRecord::Base
   def to_geojson
     @geojson ||= JSON.parse( GeojsonCacher.new(self).value )
     props = @geojson["properties"]
-    props["id"] = id
+    props["id"] = self.to_param
     props["project_count"] = project_count
     props["simple_name"] = name
     @geojson
