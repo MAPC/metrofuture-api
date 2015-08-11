@@ -29,6 +29,10 @@ class Municipality < ActiveRecord::Base
   alias_attribute :geoid, :new_GeoID
   alias_attribute :name,  :new_name
 
+  def to_param
+    "#{name.parameterize}--#{id}"
+  end
+
   def metrofuture?
     new_MetroFuture
   end

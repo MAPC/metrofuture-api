@@ -1,4 +1,9 @@
 class SubregionSerializer < ApplicationSerializer
+
+  def id
+    object.to_param.to_s
+  end
+
   attribute :name do
     object.new_FullName
   end

@@ -6,10 +6,12 @@ class ProjectsController < ApplicationController
     subr_id = filter.fetch(:subregions)     { nil }
 
     if muni_id
-      @projects = Project.municipality(muni_id).page(page_number).per(per_page)
+      slug, _sep, id = muni_id.partition('--')
+      @projects = Project.municipality(id).page(page_number).per(per_page)
     elsif subr_id
+      slug, _sep, id = subr_id.partition('--')
       @projects = Kaminari.paginate_array(
-        Subregion.find(subr_id).projects
+        Subregion.find(id).projects
       ).page(page_number).per(per_page)
     else
       @projects = Project.all.page(page_number).per(per_page)

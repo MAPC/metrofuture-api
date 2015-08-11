@@ -14,6 +14,10 @@ class Subregion < ActiveRecord::Base
     boolean.to_b ? where("new_Organization" => nil) : all
   end
 
+  def to_param
+    "#{abbv}--#{id}"
+  end
+
   has_many :municipalities, foreign_key: "new_MAPCSubregionId"
   has_many :projects, through: :municipalities
 

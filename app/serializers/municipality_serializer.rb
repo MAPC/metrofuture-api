@@ -1,4 +1,8 @@
 class MunicipalitySerializer < ApplicationSerializer
+  def id
+    object.to_param.to_s
+  end
+
   attribute :muni_id do
     object.new_TownIDMA_TownsSimplifiedMap
   end
