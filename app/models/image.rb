@@ -7,6 +7,7 @@ class Image < ActiveRecord::Base
   default_scope {
     where("IsDocument" => true)       # Is an image
     .where("ObjectTypeCode" => 10056) # Associated to a project
+    .order("ModifiedOn").reverse_order # Most recent image last
   }
 
   alias_attribute :filename,  "FileName"
