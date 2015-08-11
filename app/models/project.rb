@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
                           foreign_key:             'new_mapcprojectid',
                           association_foreign_key: 'new_municipalitiesid'
 
-  has_many :subregions, -> { uniq }, through: :municipalities
+  has_many :subregions, -> { simple.uniq }, through: :municipalities
   has_one :extension, class_name: 'Extension::Project', foreign_key: 'new_mapcprojectId'
 
   default_scope { includes(:extension)
