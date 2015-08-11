@@ -4,7 +4,9 @@ class ImagesController < ApplicationController
     filename = "#{params[:id]}.#{params[:format]}"
     style    = params.fetch(:style) { nil }
 
-    @image = Image.where(:FileName => filename).first
+    @image = Image.where(:FileName => filename)
+              .select{|i| i.project.nil? }
+              .first
 
     send_data      @image.binary(style),
       type:        @image.MimeType,

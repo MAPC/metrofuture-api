@@ -5,8 +5,8 @@ class Image < ActiveRecord::Base
   belongs_to :project, foreign_key: "ObjectId"
 
   default_scope {
-    where("IsDocument" => true)       # Is an image
-    .where("ObjectTypeCode" => 10056) # Associated to a project
+    where("IsDocument" => true)        # Is an image
+    .where("ObjectTypeCode" => 10056)  # Associated to a project
     .order("ModifiedOn").reverse_order # Most recent image last
   }
 
