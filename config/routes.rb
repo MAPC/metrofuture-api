@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  resources :projects, only: [:index, :show] do
-    resources :relationships, only: [:index, :show], on: :member
-    get 'goals', on: :member
-  end
+
+  jsonapi_resources :projects,  only: [:index, :show]
+
   resources :municipalities, only: [:index]
   resources :subregions,     only: [:index]
   resources :images,         only: [:show]

@@ -7,6 +7,15 @@ class Extension::Project < ActiveRecord::Base
   alias_attribute :title,   'new_name'
   alias_attribute :visible, 'new_Showonwebsite'
   alias_attribute :public,  :visible
+  alias_attribute :description, :new_ShortDescription
+  alias_attribute :city,    :new_LocationCity
+  alias_attribute :state,   :new_LocationState
+  alias_attribute :website, :new_Website
+  alias_attribute :number,  :new_count
+
+  def location
+    "#{city} #{state}"
+  end
 
   STATUS = {  100000000 => 'Proposed',
               100000001 => 'In Progress',

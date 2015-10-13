@@ -10,6 +10,7 @@ gem 'activerecord-sqlserver-adapter', '4.1.0'
 gem 'tiny_tds'
 
 # JSON API
+gem 'jsonapi-resources'   # Support the JSONAPI.org standard
 gem 'jsonapi-serializers' # Serialize with JSONAPI.org standard
 gem 'kaminari'            # Pagination
 gem 'api-pagination'      # Paginates API in headers

@@ -10,19 +10,7 @@ class ProjectManager < ActiveRecord::Base
 
   def name(options={})
     order = options.fetch(:format) { :first_last }
-    if [:first_last, :last_first].include? order
-      self.send(order)
-    else
-      first_last
-    end
-  end
-
-  def first_last
-    "#{name_array.first} #{name_array.last}"
-  end
-
-  def last_first
-    "#{name_array.last}, #{name_array.first}"
+    self.send(order)
   end
 
   private
@@ -30,9 +18,22 @@ class ProjectManager < ActiveRecord::Base
 
     def name_array
       if base_name.include? TOKEN
-        base_name.split(TOKEN).reverse.map(&:strip)
+        ary = base_name.partition(TOKEN).map(&:strip)
+        [ary.last, ary.first]
       else
-        base_name.split(" ")
+        ary = base_name.partition(" ")
+        [ary.first, ary.last]
       end
     end
+
+    def first_last
+      first, last = name_array
+      "#{first} #{last}"
+    end
+
+    def last_first
+      first, last = name_array
+      "#{last}, #{first}"
+    end
+
 end
