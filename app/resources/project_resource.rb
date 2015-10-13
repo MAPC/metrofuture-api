@@ -11,6 +11,8 @@ class ProjectResource < JSONAPI::Resource
              :status,
              :number
 
+  key_type :uuid
+
   # def id
   #   @model.to_param
   # end
