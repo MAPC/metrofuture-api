@@ -9,9 +9,26 @@ class ProjectResource < JSONAPI::Resource
              :project_manager,
              :website,
              :status,
-             :number
+             :number,
+             :geography,
+             :geography_type
 
   key_type :uuid
+
+  filters :sorted
+
+  def fetchable_fields
+    super - [:geography_type]
+  end
+
+  def self.apply_sort(records, order_options)
+    if order_options.keys.include? "geography_type"
+      records.sorted
+    else
+      records
+    end
+  end
+
 
   # def id
   #   @model.to_param

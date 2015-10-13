@@ -1,5 +1,5 @@
 class Extension::Project < ActiveRecord::Base
-  self.table_name = 'new_mapcprojectExtensionBase'
+  self.table_name  = 'new_mapcprojectExtensionBase'
   self.primary_key = 'new_mapcprojectId'
 
   belongs_to :base, class_name: 'Project', foreign_key: 'new_mapcprojectId'
@@ -17,13 +17,27 @@ class Extension::Project < ActiveRecord::Base
     "#{city} #{state}"
   end
 
-  STATUS = {  100000000 => 'Proposed',
-              100000001 => 'In Progress',
-              100000002 => 'Completed',
-              100000003 => 'In Development'  }
+  STATUS = {
+    100000000 => 'Proposed',
+    100000001 => 'In Progress',
+    100000002 => 'Completed',
+    100000003 => 'In Development'
+  }
 
   def status
     STATUS.fetch(new_ProjectStatus) { nil }
+  end
+
+  GEOGRAPHY = {
+    100000001 => 'Single Municipality',
+    100000000 => 'Multiple Municipalities',
+    100000002 => 'MAPC Region-Wide',
+    100000003 => 'Internally Focused',
+    100000004 => 'State-Wide'
+  }
+
+  def geography
+    GEOGRAPHY.fetch(new_MunicipalitiesType) { nil }
   end
 
   def public?

@@ -38,6 +38,13 @@ class Project < ActiveRecord::Base
 
   alias_method :title, :name
 
+  def self.sorted
+    unscoped.includes(:extension)
+      .where("new_mapcprojectExtensionBase.new_Showonwebsite" => true)
+      .where("statecode" => 0)
+      .order("new_mapcprojectExtensionBase.new_MunicipalitiesType ASC")
+  end
+
   def self.municipality(id)
     joins(:municipalities)
       .where(new_new_mapcproject_municipalitiesBase: {
