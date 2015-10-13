@@ -43,18 +43,4 @@ class Extension::Project < ActiveRecord::Base
   def public?
     visible
   end
-
-  def next
-    # Looks up all the IDs, gets the next ID in the list
-    # and uses that to look up the object.
-    ids = Project.pluck(:new_count)
-    id  = ids[ ids.index(self.new_count) + 1 ]
-    Project.where("new_mapcprojectExtensionBase.new_count = ?", id.to_s).first
-  end
-
-  def prev
-    ids = Project.pluck(:new_count).reverse!
-    id  = ids[ ids.index(self.new_count) + 1 ]
-    Project.where("new_mapcprojectExtensionBase.new_count = ?", id.to_s).first
-  end
 end

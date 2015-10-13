@@ -70,6 +70,18 @@ class Project < ActiveRecord::Base
     image.url(style) if image
   end
 
+  def next
+    self.class
+      .where("new_mapcprojectExtensionBase.new_count > #{self.new_count}")
+      .last.try(:id)
+  end
+
+  def prev
+    self.class
+      .where("new_mapcprojectExtensionBase.new_count < #{self.new_count}")
+      .first.try(:id)
+  end
+
   def method_missing(method_name, *args, &block)
     self.extension.send(method_name)
   end

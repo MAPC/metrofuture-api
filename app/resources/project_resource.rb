@@ -11,7 +11,7 @@ class ProjectResource < JSONAPI::Resource
              :status,
              :number,
              :geography,
-             :geography_type
+             :geography_type, :previous, :next
 
   key_type :uuid
 
@@ -28,6 +28,16 @@ class ProjectResource < JSONAPI::Resource
       records
     end
   end
+
+  def next
+    "http://localhost:5000/projects/#{@model.next}" if @model.next
+  end
+
+  def previous
+    "http://localhost:5000/projects/#{@model.prev}" if @model.prev
+  end
+  # custom_link :next,     :custom, with: ->(instance) { instance.next     }
+  # custom_link :previous, :custom, with: ->(instance) { instance.previous }
 
 
   # def id
