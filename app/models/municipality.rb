@@ -2,17 +2,19 @@ class Municipality < ActiveRecord::Base
   self.table_name  = 'new_municipalitiesExtensionBase'
   self.primary_key = 'new_municipalitiesId'
 
-  NO_SUBREGION = "388657F1-A069-E311-8EB6-96147297305B"
-
-  default_scope { where.not("new_TownIDMA_TownsSimplifiedMap" => nil) }
+  default_scope {
+    # Wat does this mean again?
+    where.not("new_TownIDMA_TownsSimplifiedMap" => nil)
+  }
 
   def self.metrofuture(boolean)
     boolean.to_b ? where("new_MetroFuture" => true) : all
   end
 
+  NO_SUBREGION = "388657F1-A069-E311-8EB6-96147297305B"
+
   def self.mapc(boolean)
-    if boolean.to_b
-      # ID of the "Not applicable" subregion
+    if boolean.to_b # if truthy
       where.not("new_MAPCSubregionID" => NO_SUBREGION)
     else
       all

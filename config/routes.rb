@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  jsonapi_resources :projects, only: [:index, :show]
 
-  jsonapi_resources :projects,  only: [:index, :show]
+  jsonapi_resources :municipalities, only: [:index, :show]
+  jsonapi_resources :subregions,     only: [:index, :show]
 
-  resources :municipalities, only: [:index]
-  resources :subregions,     only: [:index]
   resources :images,         only: [:show]
 
   # The priority is based upon order of creation: first created -> highest priority.
