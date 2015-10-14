@@ -1,4 +1,5 @@
 class ProjectResource < JSONAPI::Resource
+  u = Rails.application.routes.url_helpers
 
   attributes :title,
              :description,
@@ -16,6 +17,9 @@ class ProjectResource < JSONAPI::Resource
   key_type :uuid
 
   filters :regional
+
+  custom_link :next,     :custom, with: ->(i) { u.project_url(i.next)     if i.next }
+  custom_link :previous, :custom, with: ->(i) { u.project_url(i.previous) if i.previous }
 
   def fetchable_fields
     super - [:geography_type]
@@ -37,17 +41,6 @@ class ProjectResource < JSONAPI::Resource
       records
     end
   end
-
-  def next
-    "http://localhost:5000/projects/#{@model.next}" if @model.next
-  end
-
-  def previous
-    "http://localhost:5000/projects/#{@model.prev}" if @model.prev
-  end
-  # custom_link :next,     :custom, with: ->(instance) { instance.next     }
-  # custom_link :previous, :custom, with: ->(instance) { instance.previous }
-
 
   # def id
   #   @model.to_param

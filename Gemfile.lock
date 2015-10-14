@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/AKHarris/jsonapi-resources.git
+  revision: 5e8802afb33818c0a8f339bce3016ad956f91c3f
+  branch: feature/custom-links-defined-per-resource
+  specs:
+    jsonapi-resources (0.6.0)
+      rails (>= 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -84,8 +92,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
-    jsonapi-resources (0.6.0)
-      rails (>= 4.0)
     jsonapi-serializers (0.2.3)
       activesupport
     kaminari (0.16.3)
@@ -209,7 +215,7 @@ DEPENDENCIES
   foreman
   guard-rspec (= 4.3.1)
   httparty
-  jsonapi-resources
+  jsonapi-resources!
   jsonapi-serializers
   kaminari
   minitest

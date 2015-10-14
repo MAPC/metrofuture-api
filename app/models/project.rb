@@ -112,7 +112,7 @@ class Project < ActiveRecord::Base
       .last.try(:id)
   end
 
-  def prev
+  def previous
     self.class
       .where("new_mapcprojectExtensionBase.new_count < #{self.new_count}")
       .first.try(:id)
