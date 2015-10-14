@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   self.table_name  = 'new_mapcprojectBase'
   self.primary_key = 'new_mapcprojectId'
 
-  has_one    :image, foreign_key: 'ObjectId'
+  has_many   :images, foreign_key: 'ObjectId'
   belongs_to :manager,         class_name: 'ProjectManager', foreign_key: 'OwnerId'
   belongs_to :lead_department, class_name: 'Department',     foreign_key: 'OwningBusinessUnit'
 
@@ -30,6 +30,11 @@ class Project < ActiveRecord::Base
 
   def count
     extension.new_count
+  end
+
+  # Most recent image
+  def image
+    images.order("ModifiedOn").last
   end
 
   def to_param
@@ -132,6 +137,6 @@ class Project < ActiveRecord::Base
     }
 
     def shortname_for(name)
-      SHORTNAMES[name] || name
+      SHORTNAMES.fetch(name) { name }
     end
 end
