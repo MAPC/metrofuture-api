@@ -1,4 +1,4 @@
-class ImagesController < ApplicationController
+class ImagesController < ActionController::Base
 
   def show
     filename = "#{params[:id]}.#{params[:format]}"

@@ -12,17 +12,35 @@ class ProjectResource < JSONAPI::Resource
              :status,
              :number,
              :geography,
-             :geography_type, :previous, :next
+             :geography_type,
+             :next, :previous
 
   key_type :uuid
 
   filters :regional
 
+  # def image
+  #   if @model.image
+  #     Rails.application.routes.url_helpers.image_url(@model.image.filename)
+  #   end
+  # end
+
+  def image
+    styles = {}
+    if @model.image
+      u = Rails.application.routes.url_helpers
+      styles = { small:  u.image_url(@model.image, style: 'small'),
+        medium: u.image_url(@model.image, style: 'medium'),
+        large:  u.image_url(@model.image, style: 'large') }
+    end
+    styles
+  end
+
   custom_link :next,     :custom, with: ->(i) { u.project_url(i.next)     if i.next }
   custom_link :previous, :custom, with: ->(i) { u.project_url(i.previous) if i.previous }
 
   def fetchable_fields
-    super - [:geography_type]
+    super - [:geography_type, :next, :previous]
   end
 
   def self.apply_filter(records, filter, value, options)
@@ -45,10 +63,6 @@ class ProjectResource < JSONAPI::Resource
   # def id
   #   @model.to_param
   # end
-
-  def image
-    @model.image.try :url
-  end
 
   def primary_department
     @model.department_name
