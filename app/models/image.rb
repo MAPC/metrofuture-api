@@ -50,6 +50,10 @@ class Image < ActiveRecord::Base
     }
   end
 
+  def to_param
+    filename
+  end
+
   def resize(style)
     if style
       dimensions = styles[style.to_sym]

@@ -12,8 +12,7 @@ class ProjectResource < JSONAPI::Resource
              :status,
              :number,
              :geography,
-             :geography_type,
-             :next, :previous
+             :geography_type
 
   key_type :uuid
 
@@ -36,11 +35,11 @@ class ProjectResource < JSONAPI::Resource
     styles
   end
 
-  custom_link :next,     :custom, with: ->(i) { u.project_url(i.next)     if i.next }
-  custom_link :previous, :custom, with: ->(i) { u.project_url(i.previous) if i.previous }
+  custom_link :next,     :custom, with: ->(i) { u.project_url(i.model.next.presence) if i.model.next }
+  custom_link :previous, :custom, with: ->(i) { u.project_url(i.model.previous) if i.model.previous }
 
   def fetchable_fields
-    super - [:geography_type, :next, :previous]
+    super - [:geography_type]
   end
 
   def self.apply_filter(records, filter, value, options)
