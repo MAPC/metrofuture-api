@@ -38,9 +38,26 @@ class Project < ActiveRecord::Base
 
   alias_method :title, :name
 
+  # TODO: Smell: These values shouldn't be hardcoded when they're
+  # also in Extension::Project. I think this is suggesting that
+  # MunicipalitiesType might want to be a class, perhaps ActiveHash,
+  # that has the
+  #   text ('MAPC Region-Wide')
+  #   preferred text ('Regional')
+  #   CRM code ('100000002')
+  #   priority ('3')
   def self.sorted
     base_default
-      .order("new_mapcprojectExtensionBase.new_MunicipalitiesType ASC")
+      .order("""
+              CASE WHEN new_MunicipalitiesType = '100000001' THEN '1'
+                   WHEN new_MunicipalitiesType = '100000000' THEN '2'
+                   WHEN new_MunicipalitiesType = '100000002' THEN '3'
+                   WHEN new_MunicipalitiesType = '100000004' THEN '4'
+                   WHEN new_MunicipalitiesType = '100000003' THEN '5'
+                   ELSE new_MunicipalitiesType END ASC
+            """)
+
+
   end
 
   def self.regional

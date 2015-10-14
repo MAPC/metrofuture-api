@@ -29,11 +29,11 @@ class Extension::Project < ActiveRecord::Base
   end
 
   GEOGRAPHY = {
-    100000001 => 'Single Municipality',
-    100000000 => 'Multiple Municipalities',
-    100000002 => 'MAPC Region-Wide',
-    100000003 => 'Internally Focused',
-    100000004 => 'State-Wide'
+    100000001 => 'Single Municipality',     # 1
+    100000000 => 'Multiple Municipalities', # 2
+    100000002 => 'MAPC Region-Wide',        # 3
+    100000004 => 'State-Wide',              # 4
+    100000003 => 'Internally Focused'       # 5
   }
 
   def geography
