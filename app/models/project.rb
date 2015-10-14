@@ -39,10 +39,29 @@ class Project < ActiveRecord::Base
   alias_method :title, :name
 
   def self.sorted
+    base_default
+      .order("new_mapcprojectExtensionBase.new_MunicipalitiesType ASC")
+  end
+
+  def self.regional
+    base_default
+      .where("new_mapcprojectExtensionBase.new_MunicipalitiesType IN (100000002, 100000004)")
+      # Does both regional and statewide
+  end
+
+  # TODO: self.geography(geography_text)
+  # This would do a lookup of geography codes from display text.
+  # For example, /projects?filter[geography]='MAPC Region-Wide'
+  # would be converted here to
+  #
+  #   .where("extension.municipalities_type = '100000002'"), and the
+  #
+  # same for all other geography types.
+
+  def self.base_default
     unscoped.includes(:extension)
       .where("new_mapcprojectExtensionBase.new_Showonwebsite" => true)
       .where("statecode" => 0)
-      .order("new_mapcprojectExtensionBase.new_MunicipalitiesType ASC")
   end
 
   def self.municipality(id)

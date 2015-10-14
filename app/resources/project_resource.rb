@@ -15,10 +15,19 @@ class ProjectResource < JSONAPI::Resource
 
   key_type :uuid
 
-  filters :sorted
+  filters :regional
 
   def fetchable_fields
     super - [:geography_type]
+  end
+
+  def self.apply_filter(records, filter, value, options)
+    case filter
+    when :regional
+      return records.regional
+    else
+      return super(records, filter, value)
+    end
   end
 
   def self.apply_sort(records, order_options)
