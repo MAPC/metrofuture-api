@@ -26,9 +26,11 @@ class Subregion < ActiveRecord::Base
   end
 
   def to_geojson
+    # TODO This logic should be moved to the resource,
+    #   since it is presentation logic.
     @geojson ||= JSON.parse( SubregionGeojsonCacher.new(self).value )
     props = @geojson["properties"]
-    props["id"] = self.to_param
+    props["id"] = self.id # TODO with Friendly URLs self.to_param
     props["project_count"] = project_count
     props["simple_name"] = name
     @geojson
