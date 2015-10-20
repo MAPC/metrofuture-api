@@ -4,6 +4,7 @@ class Goal < ActiveRecord::Base
 
   has_one :extension, class_name: 'Extension::Goal', foreign_key: 'new_mapcgoalId'
   default_scope { includes(:extension) }
+
   def method_missing(method_name, *args, &block)
     self.extension.send(method_name)
   end

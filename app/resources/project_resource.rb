@@ -14,7 +14,15 @@ class ProjectResource < JSONAPI::Resource
              :geography,
              :geography_type
 
+  has_many :municipalities
+  has_many :subregions
+  has_many :goals
+
   key_type :uuid
+
+  # def id
+  #   @model.to_param
+  # end
 
   filters :regional
 
@@ -23,6 +31,17 @@ class ProjectResource < JSONAPI::Resource
   #     Rails.application.routes.url_helpers.image_url(@model.image.filename)
   #   end
   # end
+
+  def find_by_key(key, options = {})
+    # _primary_key = :new_count
+    # key, _, name = params[:id].partition('--')
+    context = options[:context]
+    records = records(options)
+    records = apply_includes(records, options)
+    model = records.first #.where(:new_count => 431).first
+    fail JSONAPI::Exceptions::RecordNotFound.new(key) if model.nil?
+    new(model, context)
+  end
 
   def image
     styles = {}
@@ -35,7 +54,7 @@ class ProjectResource < JSONAPI::Resource
     styles
   end
 
-  custom_link :next,     :custom, with: ->(i) { u.project_url(i.model.next.presence) if i.model.next }
+  custom_link :next,     :custom, with: ->(i) { u.project_url(i.model.next) if i.model.next }
   custom_link :previous, :custom, with: ->(i) { u.project_url(i.model.previous) if i.model.previous }
 
   def fetchable_fields

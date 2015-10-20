@@ -38,7 +38,7 @@ class Project < ActiveRecord::Base
   end
 
   def to_param
-    "#{count}-#{name.to_s.parameterize}"
+    "#{count}--#{name.to_s.parameterize}"
   end
 
   alias_method :title, :name
