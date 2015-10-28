@@ -12,8 +12,8 @@ gem 'tiny_tds'
 # JSON API
 # Support the JSONAPI.org standard
 gem 'jsonapi-resources',
-  git:    'git://github.com/AKHarris/jsonapi-resources.git',
-  branch: 'feature/custom-links-defined-per-resource'
+  git: 'git://github.com/AKHarris/jsonapi-resources.git',
+  ref: '05cbf3ed211fc9e048e01b7c14d5934df2558c2b'
 
 gem 'jsonapi-serializers' # Serialize with JSONAPI.org standard
 gem 'kaminari'            # Pagination

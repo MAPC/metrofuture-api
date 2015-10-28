@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/AKHarris/jsonapi-resources.git
-  revision: 5e8802afb33818c0a8f339bce3016ad956f91c3f
-  branch: feature/custom-links-defined-per-resource
+  revision: 05cbf3ed211fc9e048e01b7c14d5934df2558c2b
+  ref: 05cbf3ed211fc9e048e01b7c14d5934df2558c2b
   specs:
-    jsonapi-resources (0.6.0)
+    jsonapi-resources (0.6.1)
       rails (>= 4.0)
 
 GEM

@@ -54,8 +54,8 @@ class ProjectResource < JSONAPI::Resource
     styles
   end
 
-  custom_link :next,     :custom, with: ->(i) { u.project_url(i.model.next) if i.model.next }
-  custom_link :previous, :custom, with: ->(i) { u.project_url(i.model.previous) if i.model.previous }
+  custom_link :next,     ->(source, link_builder) { u.project_url(source._model.next)     if source._model.next     }
+  custom_link :previous, ->(source, link_builder) { u.project_url(source._model.previous) if source._model.previous }
 
   def fetchable_fields
     super - [:geography_type]
