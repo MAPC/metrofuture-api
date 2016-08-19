@@ -51,4 +51,5 @@ end
 
 group :production do
   gem 'puma' # App server
+  gem 'rails_12factor' # Log output
 end
