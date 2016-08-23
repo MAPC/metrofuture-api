@@ -1,4 +1,4 @@
-module ApiHelper
+module APIHelper
 
   def paginate(collection)
     current_page_num = collection.current_page
