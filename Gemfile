@@ -53,6 +53,7 @@ group :development, :test do
 end
 
 group :production do
-  gem 'puma' # App server
+  gem 'puma'           # App server
   gem 'rails_12factor' # Log output
+  gem 'pg' # Just to get it deployed.
 end
