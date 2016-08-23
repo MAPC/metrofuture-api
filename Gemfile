@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-ruby '2.1.5'
+ruby '2.3.1'
 
-gem 'rails', '4.1.0'
+gem 'bundler', '1.11.2'
+
+gem 'rails', '4.2.5.1'
 gem 'rails-api'
 
 # Database connection
-gem 'activerecord-sqlserver-adapter', '4.1.0'
+gem 'activerecord-sqlserver-adapter'#, '4.2.5.1'
 gem 'tiny_tds'
 
 # JSON API
@@ -14,6 +16,7 @@ gem 'tiny_tds'
 gem 'jsonapi-resources',
   git: 'git://github.com/AKHarris/jsonapi-resources.git',
   ref: '05cbf3ed211fc9e048e01b7c14d5934df2558c2b'
+gem 'versionist'
 
 gem 'jsonapi-serializers' # Serialize with JSONAPI.org standard
 gem 'kaminari'            # Pagination
