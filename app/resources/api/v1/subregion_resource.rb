@@ -1,4 +1,4 @@
-class SubregionResource < JSONAPI::Resource
+class API::V1::SubregionResource < JSONAPI::Resource
   attributes :name, :abbv, :geojson
   has_many :projects
 

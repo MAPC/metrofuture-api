@@ -1,4 +1,4 @@
-class ProjectResource < JSONAPI::Resource
+class API::V1::ProjectResource < JSONAPI::Resource
   u = Rails.application.routes.url_helpers
 
   attributes :title,

@@ -1,10 +1,19 @@
+require 'api_version'
+require 'subdomain_constraint'
+
 Rails.application.routes.draw do
   resources :images, only: [:show]
 
-  jsonapi_resources :projects, only: [:index, :show]
+  namespace :api, constraints: SubdomainConstraint.new(/^api/), path: '' do
+    api_version(APIVersion.new(version: 1, default: true).params) do
 
-  jsonapi_resources :municipalities, only: [:index, :show]
-  jsonapi_resources :subregions,     only: [:index, :show]
+      jsonapi_resources :projects,       only: [:index, :show]
+      jsonapi_resources :municipalities, only: [:index, :show]
+      jsonapi_resources :subregions,     only: [:index, :show]
+
+    end
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

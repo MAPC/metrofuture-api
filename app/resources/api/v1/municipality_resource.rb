@@ -1,4 +1,4 @@
-class MunicipalityResource < JSONAPI::Resource
+class API::V1::MunicipalityResource < JSONAPI::Resource
 
   attributes :name,
              :project_count,
