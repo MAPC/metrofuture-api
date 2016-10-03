@@ -4,11 +4,11 @@ ruby '2.3.1'
 
 gem 'bundler', '1.11.2'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.1.2'
 gem 'rails-api'
 
 # Database connection
-gem 'activerecord-sqlserver-adapter'#, '4.2.5.1'
+gem 'activerecord-sqlserver-adapter', '4.1.2'
 gem 'tiny_tds'
 
 # JSON API
@@ -39,7 +39,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pg' # For test database
   gem 'rspec-rails',        '~> 2.14.0' # Stick to a specific version
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'factory_girl_rails',    '~> 4.0' # Build factories quickly
@@ -55,5 +54,7 @@ end
 group :production do
   gem 'puma'           # App server
   gem 'rails_12factor' # Log output
-  gem 'pg' # Just to get it deployed.
 end
+
+
+gem 'pg' # For testing, and to get Heroku to deploy it.
