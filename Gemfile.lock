@@ -172,6 +172,7 @@ GEM
     ruby-graphviz (1.2.2)
     ruby_dep (1.4.0)
     safe_yaml (1.0.4)
+    scout_apm (2.1.13)
     shellany (0.0.1)
     slop (3.6.0)
     spring (1.7.2)
@@ -235,6 +236,7 @@ DEPENDENCIES
   redis
   rmagick
   rspec-rails (~> 2.14.0)
+  scout_apm
   spring
   spring-commands-rspec (~> 1.0)
   tiny_tds

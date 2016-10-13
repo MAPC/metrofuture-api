@@ -54,6 +54,7 @@ end
 group :production do
   gem 'puma'           # App server
   gem 'rails_12factor' # Log output
+  gem 'scout_apm'      # Memory leak hunter
 end
 
 
