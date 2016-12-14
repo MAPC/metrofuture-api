@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-ruby '2.1.5'
+ruby '2.3.1'
 
-gem 'rails', '4.1.0'
+gem 'bundler', '1.11.2'
+
+gem 'rails', '4.1.2'
 gem 'rails-api'
 
 # Database connection
-gem 'activerecord-sqlserver-adapter', '4.1.0'
+gem 'activerecord-sqlserver-adapter', '4.1.2'
 gem 'tiny_tds'
 
 # JSON API
@@ -14,6 +16,7 @@ gem 'tiny_tds'
 gem 'jsonapi-resources',
   git: 'git://github.com/AKHarris/jsonapi-resources.git',
   ref: '05cbf3ed211fc9e048e01b7c14d5934df2558c2b'
+gem 'versionist'
 
 gem 'jsonapi-serializers' # Serialize with JSONAPI.org standard
 gem 'kaminari'            # Pagination
@@ -40,7 +43,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pg' # For test database
   gem 'rspec-rails',        '~> 2.14.0' # Stick to a specific version
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'factory_girl_rails',    '~> 4.0' # Build factories quickly
@@ -54,6 +56,10 @@ group :development, :test do
 end
 
 group :production do
-  gem 'puma' # App server
+  gem 'puma'           # App server
   gem 'rails_12factor' # Log output
+  gem 'scout_apm'      # Memory leak hunter
 end
+
+
+gem 'pg' # For testing, and to get Heroku to deploy it.

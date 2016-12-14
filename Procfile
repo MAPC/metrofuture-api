@@ -1,1 +1,1 @@
-web: rails s -p $PORT
+web: bin/qgsocksify bundle exec puma -C config/puma.rb
