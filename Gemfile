@@ -29,6 +29,10 @@ gem 'redis'               # Image caching
 gem 'foreman'
 gem 'wannabe_bool'        # Convert boolean-ish values to booleans
 gem 'httparty'            # HTTP requests
+gem 'rack-mini-profiler'
+gem 'flamegraph'
+gem 'stackprof' # ruby 2.1+ only
+gem 'memory_profiler'
 
 group :development do
   gem 'byebug'
