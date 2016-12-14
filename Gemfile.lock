@@ -237,11 +237,7 @@ DEPENDENCIES
   puma
   rack-cors
   rack-mini-profiler
-<<<<<<< HEAD
-  rails (= 4.1.0)
-=======
   rails (= 4.1.2)
->>>>>>> master
   rails-api
   rails-erd
   rails_12factor
