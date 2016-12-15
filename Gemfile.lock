@@ -208,6 +208,9 @@ GEM
     webmock (1.8.11)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
+    yaml_db (0.4.2)
+      rails (>= 3.0, < 5.1)
+      rake (>= 0.8.7)
     yard (0.9.5)
 
 PLATFORMS
@@ -253,6 +256,7 @@ DEPENDENCIES
   versionist
   wannabe_bool
   webmock (~> 1.8.4)
+  yaml_db
 
 BUNDLED WITH
    1.11.2

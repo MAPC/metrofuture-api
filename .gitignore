@@ -16,3 +16,4 @@
 /tmp
 QUOTAGUARD-LICENSE.txt
 .env
+db/data.yml

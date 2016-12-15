@@ -40,6 +40,7 @@ group :development do
   gem 'better_errors'     # Clearer error messages
   gem 'binding_of_caller' # Error message REPL & more
   gem 'rails-erd'         # Output data model diagrams
+  gem 'yaml_db'
 end
 
 group :development, :test do

@@ -633,6 +633,33 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "BulkDeleteFailureBase", ["BulkDeleteOperationId"], name: "fndx_for_cascaderelationship_BulkDeleteOperation_BulkDeleteFailure"
 
+  create_table "BulkDeleteIndependent_a1818629973040169ef2b7d029b058ab", id: false, force: true do |t|
+    t.uuid    "RecordId",               null: false
+    t.string  "EntityName", limit: 128
+    t.boolean "Processed"
+    t.integer "QueryIndex"
+  end
+
+  add_index "BulkDeleteIndependent_a1818629973040169ef2b7d029b058ab", ["RecordId", "QueryIndex"], name: "idx_RecordId_QueryIndex"
+
+  create_table "BulkDeleteIndependent_b29842b6585b4bbbbe1905c653de01cc", id: false, force: true do |t|
+    t.uuid    "RecordId",               null: false
+    t.string  "EntityName", limit: 128
+    t.boolean "Processed"
+    t.integer "QueryIndex"
+  end
+
+  add_index "BulkDeleteIndependent_b29842b6585b4bbbbe1905c653de01cc", ["RecordId", "QueryIndex"], name: "idx_RecordId_QueryIndex"
+
+  create_table "BulkDeleteIndependent_bb14d43fe1004e70b42eb393ebb09830", id: false, force: true do |t|
+    t.uuid    "RecordId",               null: false
+    t.string  "EntityName", limit: 128
+    t.boolean "Processed"
+    t.integer "QueryIndex"
+  end
+
+  add_index "BulkDeleteIndependent_bb14d43fe1004e70b42eb393ebb09830", ["RecordId", "QueryIndex"], name: "idx_RecordId_QueryIndex"
+
   create_table "BulkDeleteIndependent_d57aaef64faa431e994fbac9efc75044", id: false, force: true do |t|
     t.uuid    "RecordId",               null: false
     t.string  "EntityName", limit: 128
@@ -1325,6 +1352,9 @@ ActiveRecord::Schema.define(version: 0) do
     t.uuid     "gap_FunctionalManager"
     t.uuid     "gap_LineManager"
     t.string   "new_Twitter",                     limit: 100
+    t.integer  "new_Energy_Affiliation"
+    t.boolean  "new_Energy_ManagementRole"
+    t.boolean  "new_Energy_Newsletter"
   end
 
   add_index "ContactExtensionBase", ["new_SecondaryTags", "new_PrimaryTag", "new_TertiaryTag", "new_MAPCSubregionLookup", "new_MAPCCalendarSubscription"], name: "ndx_SystemManaged_Contact"
@@ -3080,16 +3110,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "MatchCode03706cd9148b490aa4f6a5a6f09bca25", ["ModifiedOn"], name: "Index2"
   add_index "MatchCode03706cd9148b490aa4f6a5a6f09bca25", ["ObjectId"], name: "Index3", unique: true
 
-  create_table "MatchCode0842cbaef76144ad815d615e6f1f89ca", id: false, force: true do |t|
-    t.uuid     "ObjectId",               null: false
-    t.string   "MatchCode",  limit: 450
-    t.datetime "ModifiedOn"
-  end
-
-  add_index "MatchCode0842cbaef76144ad815d615e6f1f89ca", ["MatchCode"], name: "Index1"
-  add_index "MatchCode0842cbaef76144ad815d615e6f1f89ca", ["ModifiedOn"], name: "Index2"
-  add_index "MatchCode0842cbaef76144ad815d615e6f1f89ca", ["ObjectId"], name: "Index3", unique: true
-
   create_table "MatchCode2be85ccc56fa45f8ba2255c73a33e447", id: false, force: true do |t|
     t.uuid     "ObjectId",               null: false
     t.string   "MatchCode",  limit: 450
@@ -3109,26 +3129,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "MatchCode4abf128d307644509127068d01f6969a", ["MatchCode"], name: "Index1"
   add_index "MatchCode4abf128d307644509127068d01f6969a", ["ModifiedOn"], name: "Index2"
   add_index "MatchCode4abf128d307644509127068d01f6969a", ["ObjectId"], name: "Index3", unique: true
-
-  create_table "MatchCode5221861528e6479aa2d295862c6a88ca", id: false, force: true do |t|
-    t.uuid     "ObjectId",               null: false
-    t.string   "MatchCode",  limit: 450
-    t.datetime "ModifiedOn"
-  end
-
-  add_index "MatchCode5221861528e6479aa2d295862c6a88ca", ["MatchCode"], name: "Index1"
-  add_index "MatchCode5221861528e6479aa2d295862c6a88ca", ["ModifiedOn"], name: "Index2"
-  add_index "MatchCode5221861528e6479aa2d295862c6a88ca", ["ObjectId"], name: "Index3", unique: true
-
-  create_table "MatchCode54cd3c877f7744cbb399580156875386", id: false, force: true do |t|
-    t.uuid     "ObjectId",               null: false
-    t.string   "MatchCode",  limit: 450
-    t.datetime "ModifiedOn"
-  end
-
-  add_index "MatchCode54cd3c877f7744cbb399580156875386", ["MatchCode"], name: "Index1"
-  add_index "MatchCode54cd3c877f7744cbb399580156875386", ["ModifiedOn"], name: "Index2"
-  add_index "MatchCode54cd3c877f7744cbb399580156875386", ["ObjectId"], name: "Index3", unique: true
 
   create_table "MatchCode644e114623654881bd8861b9d975e6ed", id: false, force: true do |t|
     t.uuid     "ObjectId",               null: false
@@ -3169,6 +3169,16 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "MatchCode7f03acf3b71e4777a03594433a3dfde8", ["MatchCode"], name: "Index1"
   add_index "MatchCode7f03acf3b71e4777a03594433a3dfde8", ["ModifiedOn"], name: "Index2"
   add_index "MatchCode7f03acf3b71e4777a03594433a3dfde8", ["ObjectId"], name: "Index3", unique: true
+
+  create_table "MatchCodea941fafe5dab4a43b98d20e10603a878", id: false, force: true do |t|
+    t.uuid     "ObjectId",               null: false
+    t.string   "MatchCode",  limit: 450
+    t.datetime "ModifiedOn"
+  end
+
+  add_index "MatchCodea941fafe5dab4a43b98d20e10603a878", ["MatchCode"], name: "Index1"
+  add_index "MatchCodea941fafe5dab4a43b98d20e10603a878", ["ModifiedOn"], name: "Index2"
+  add_index "MatchCodea941fafe5dab4a43b98d20e10603a878", ["ObjectId"], name: "Index3", unique: true
 
   create_table "MatchCodec0385fcf1ba54cd8ac873942587f1c0d", id: false, force: true do |t|
     t.uuid     "ObjectId",               null: false
@@ -5917,15 +5927,15 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_0232138977d1e4118b3596147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_027db31cc5e8e211884d96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
   create_table "SubscriptionStatistics_02ac65f67fd1e4118b3596147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_034c81674240e511a73c766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -5965,11 +5975,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_0d652143a731e3119e1296147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+  create_table "SubscriptionStatistics_0d477c7c9025e5119eaf766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_0e4f88e6c45de3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+  create_table "SubscriptionStatistics_0d652143a731e3119e1296147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -5986,6 +5996,10 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "SubscriptionStatistics_15cf51cc3fc2e211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_1671d9308fb4e511b83f766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6009,6 +6023,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
+  create_table "SubscriptionStatistics_1d5e9a84c13ae5118553766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
   create_table "SubscriptionStatistics_1d6df579a98de3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6018,6 +6036,10 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "SubscriptionStatistics_1e0d5a3860eae211884d96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_20926e24c607e611bba2766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6033,19 +6055,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_235fb31135aee4118b3596147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_23d06bd4fbc2e211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
   create_table "SubscriptionStatistics_251519e63fc2e211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
-  create_table "SubscriptionStatistics_2607d68b398fe3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6066,10 +6080,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "SubscriptionStatistics_2aa1443fe5cee211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
-  create_table "SubscriptionStatistics_2aa9f9d1db8de3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6129,10 +6139,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_3a8a4c9aa98de3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_3ace5990d26be211bf9c96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6142,6 +6148,10 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "SubscriptionStatistics_405dc57d83dee211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_41655d7c6647e511a73c766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6177,11 +6187,23 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
+  create_table "SubscriptionStatistics_4a3077193061e511896b766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
   create_table "SubscriptionStatistics_4a6a4fb373e9e211884d96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
   create_table "SubscriptionStatistics_4a7237808ff4e211a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_4cc122b0dd6ae611bd08766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_503309da4ab6e611b21b766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6246,10 +6268,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "SubscriptionStatistics_61a7c3e3c7e8e211884d96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
-  create_table "SubscriptionStatistics_632439af39bce4118b3596147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6329,10 +6347,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_7e8467f284fde411bc1f96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_7edd221f94e2e21180d396147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6353,11 +6367,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_841a803240c2e211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+  create_table "SubscriptionStatistics_821f7b5dbfa5e611b21b766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_84a42010db8de3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+  create_table "SubscriptionStatistics_841a803240c2e211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6369,15 +6383,27 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_88164cbd7adbe3118fd996147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_89eb2a2bf160e3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
+  create_table "SubscriptionStatistics_8c839fbddd6ae611bd08766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_8e0f2d505789e511a1e8766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
   create_table "SubscriptionStatistics_8ea680431c6ce41195d396147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_90f0fcf9c507e611bba2766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_91a21265bfa5e611b21b766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6397,7 +6423,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_9bf5a184332ce311a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+  create_table "SubscriptionStatistics_98b8ee879f3fe5118553766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_9b3894c9f561e511896b766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6413,11 +6443,19 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
+  create_table "SubscriptionStatistics_a04b7e332cade611b21b766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
   create_table "SubscriptionStatistics_a18c1ca1e9f2e211a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
   create_table "SubscriptionStatistics_a7e143f83beae211884d96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
+  create_table "SubscriptionStatistics_a898afa5d82ce611a434766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6465,6 +6503,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
+  create_table "SubscriptionStatistics_b1ef55e14b40e511a73c766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
   create_table "SubscriptionStatistics_b4b97b7258c2e211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6485,10 +6527,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_b89dcc497c09e511bc1f96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_b89eecb7e4e7e211884d96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6501,14 +6539,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_b985503bd98de3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
-  create_table "SubscriptionStatistics_ba30695193c7e4118b3596147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_bbb88479e0b6e4118b3596147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6517,23 +6547,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_be01f3dc5345e311ade596147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_bf3c24e19dc9e211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_bff8d6d1b1c9e4118b3596147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_c13e866ae9f2e211a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
-  create_table "SubscriptionStatistics_c1c341b1dc8de3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6557,10 +6575,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_c6565d453b8fe3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_c894a5a48bf4e211a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6578,10 +6592,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "SubscriptionStatistics_cb6eb026e3cee211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
-  create_table "SubscriptionStatistics_cbb5f6753117e411956096147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6621,6 +6631,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
+  create_table "SubscriptionStatistics_daad09f9ea7be511901f766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
   create_table "SubscriptionStatistics_de8e2141a3a3e3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6645,6 +6659,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
+  create_table "SubscriptionStatistics_e30bc996c571e511901f766cc8970d42", primary_key: "ObjectTypeCode", force: true do |t|
+    t.boolean "FullSyncRequired", null: false
+  end
+
   create_table "SubscriptionStatistics_e46845f939eae211884d96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6657,23 +6675,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_e8e0a9d68ff4e211a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_e9e4f7e208e8e211884d96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_ea1e6078d98de3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_edfb8669ff16e311a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
-  create_table "SubscriptionStatistics_eee8f742e7fae311b1b096147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6697,10 +6703,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_f3eadb607078e3118eb696147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_f3f5a8d5f9c2e211957a96147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6721,10 +6723,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_f85e1e1f0862e41195d396147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_f895807e48eee211a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
@@ -6733,19 +6731,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "FullSyncRequired", null: false
   end
 
-  create_table "SubscriptionStatistics_f913980b2b5ce31198f996147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
   create_table "SubscriptionStatistics_f95af40d461ae311a9b796147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
   create_table "SubscriptionStatistics_fabf4f49ac59e211a63096147297305b", primary_key: "ObjectTypeCode", force: true do |t|
-    t.boolean "FullSyncRequired", null: false
-  end
-
-  create_table "SubscriptionStatistics_fb03b2a5c8f7e311b1b096147297305b", primary_key: "ObjectTypeCode", force: true do |t|
     t.boolean "FullSyncRequired", null: false
   end
 
@@ -6824,14 +6814,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_0186da6336cfe4118b3596147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_0186da6336cfe4118b3596147297305b"
 
-  create_table "SyncEntry_0232138977d1e4118b3596147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_0232138977d1e4118b3596147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_0232138977d1e4118b3596147297305b"
-
   create_table "SyncEntry_027db31cc5e8e211884d96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -6847,6 +6829,14 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_02ac65f67fd1e4118b3596147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_02ac65f67fd1e4118b3596147297305b"
+
+  create_table "SyncEntry_034c81674240e511a73c766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_034c81674240e511a73c766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_034c81674240e511a73c766cc8970d42"
 
   create_table "SyncEntry_0387d45173e9e211884d96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -6920,6 +6910,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_0cf0e13d82ede211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_0cf0e13d82ede211884d96147297305b"
 
+  create_table "SyncEntry_0d477c7c9025e5119eaf766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_0d477c7c9025e5119eaf766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_0d477c7c9025e5119eaf766cc8970d42"
+
   create_table "SyncEntry_0d652143a731e3119e1296147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -6927,14 +6925,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_0d652143a731e3119e1296147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_0d652143a731e3119e1296147297305b"
-
-  create_table "SyncEntry_0e4f88e6c45de3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_0e4f88e6c45de3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_0e4f88e6c45de3118eb696147297305b"
 
   create_table "SyncEntry_10029fddeaf2e211a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -6967,6 +6957,14 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_15cf51cc3fc2e211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_15cf51cc3fc2e211957a96147297305b"
+
+  create_table "SyncEntry_1671d9308fb4e511b83f766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_1671d9308fb4e511b83f766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_1671d9308fb4e511b83f766cc8970d42"
 
   create_table "SyncEntry_182a3e1b37eae211884d96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7008,6 +7006,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_1c413b6064f4e211a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_1c413b6064f4e211a9b796147297305b"
 
+  create_table "SyncEntry_1d5e9a84c13ae5118553766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_1d5e9a84c13ae5118553766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_1d5e9a84c13ae5118553766cc8970d42"
+
   create_table "SyncEntry_1d6df579a98de3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7031,6 +7037,14 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_1e0d5a3860eae211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_1e0d5a3860eae211884d96147297305b"
+
+  create_table "SyncEntry_20926e24c607e611bba2766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_20926e24c607e611bba2766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_20926e24c607e611bba2766cc8970d42"
 
   create_table "SyncEntry_20936ef7d69be211b27896147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7056,14 +7070,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_227b2f740e40e3119e1296147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_227b2f740e40e3119e1296147297305b"
 
-  create_table "SyncEntry_235fb31135aee4118b3596147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_235fb31135aee4118b3596147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_235fb31135aee4118b3596147297305b"
-
   create_table "SyncEntry_23d06bd4fbc2e211957a96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7079,14 +7085,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_251519e63fc2e211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_251519e63fc2e211957a96147297305b"
-
-  create_table "SyncEntry_2607d68b398fe3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_2607d68b398fe3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_2607d68b398fe3118eb696147297305b"
 
   create_table "SyncEntry_2647c318a059e211a63096147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7127,14 +7125,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_2aa1443fe5cee211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_2aa1443fe5cee211957a96147297305b"
-
-  create_table "SyncEntry_2aa9f9d1db8de3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_2aa9f9d1db8de3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_2aa9f9d1db8de3118eb696147297305b"
 
   create_table "SyncEntry_30ede0b53beae211884d96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7248,14 +7238,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_3a776b8d7adbe3118fd996147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_3a776b8d7adbe3118fd996147297305b"
 
-  create_table "SyncEntry_3a8a4c9aa98de3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_3a8a4c9aa98de3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_3a8a4c9aa98de3118eb696147297305b"
-
   create_table "SyncEntry_3ace5990d26be211bf9c96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7279,6 +7261,14 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_405dc57d83dee211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_405dc57d83dee211957a96147297305b"
+
+  create_table "SyncEntry_41655d7c6647e511a73c766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_41655d7c6647e511a73c766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_41655d7c6647e511a73c766cc8970d42"
 
   create_table "SyncEntry_41be6de463b2e211894b96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7344,6 +7334,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_49e0a2f35d21e311a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_49e0a2f35d21e311a9b796147297305b"
 
+  create_table "SyncEntry_4a3077193061e511896b766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_4a3077193061e511896b766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_4a3077193061e511896b766cc8970d42"
+
   create_table "SyncEntry_4a6a4fb373e9e211884d96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7359,6 +7357,22 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_4a7237808ff4e211a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_4a7237808ff4e211a9b796147297305b"
+
+  create_table "SyncEntry_4cc122b0dd6ae611bd08766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_4cc122b0dd6ae611bd08766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_4cc122b0dd6ae611bd08766cc8970d42"
+
+  create_table "SyncEntry_503309da4ab6e611b21b766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_503309da4ab6e611b21b766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_503309da4ab6e611b21b766cc8970d42"
 
   create_table "SyncEntry_509f964485dee211957a96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7487,14 +7501,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_61a7c3e3c7e8e211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_61a7c3e3c7e8e211884d96147297305b"
-
-  create_table "SyncEntry_632439af39bce4118b3596147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_632439af39bce4118b3596147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_632439af39bce4118b3596147297305b"
 
   create_table "SyncEntry_63693dd533aee4118b3596147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7648,14 +7654,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_7c28a3df71ede211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_7c28a3df71ede211884d96147297305b"
 
-  create_table "SyncEntry_7e8467f284fde411bc1f96147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_7e8467f284fde411bc1f96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_7e8467f284fde411bc1f96147297305b"
-
   create_table "SyncEntry_7edd221f94e2e21180d396147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7696,6 +7694,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_80b81e43332ce311a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_80b81e43332ce311a9b796147297305b"
 
+  create_table "SyncEntry_821f7b5dbfa5e611b21b766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_821f7b5dbfa5e611b21b766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_821f7b5dbfa5e611b21b766cc8970d42"
+
   create_table "SyncEntry_841a803240c2e211957a96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7703,14 +7709,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_841a803240c2e211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_841a803240c2e211957a96147297305b"
-
-  create_table "SyncEntry_84a42010db8de3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_84a42010db8de3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_84a42010db8de3118eb696147297305b"
 
   create_table "SyncEntry_867b167071a8e3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7728,14 +7726,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_877410cfa88ee3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_877410cfa88ee3118eb696147297305b"
 
-  create_table "SyncEntry_88164cbd7adbe3118fd996147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_88164cbd7adbe3118fd996147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_88164cbd7adbe3118fd996147297305b"
-
   create_table "SyncEntry_89eb2a2bf160e3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7744,6 +7734,22 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_89eb2a2bf160e3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_89eb2a2bf160e3118eb696147297305b"
 
+  create_table "SyncEntry_8c839fbddd6ae611bd08766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_8c839fbddd6ae611bd08766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_8c839fbddd6ae611bd08766cc8970d42"
+
+  create_table "SyncEntry_8e0f2d505789e511a1e8766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_8e0f2d505789e511a1e8766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_8e0f2d505789e511a1e8766cc8970d42"
+
   create_table "SyncEntry_8ea680431c6ce41195d396147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7751,6 +7757,22 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_8ea680431c6ce41195d396147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_8ea680431c6ce41195d396147297305b"
+
+  create_table "SyncEntry_90f0fcf9c507e611bba2766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_90f0fcf9c507e611bba2766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_90f0fcf9c507e611bba2766cc8970d42"
+
+  create_table "SyncEntry_91a21265bfa5e611b21b766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_91a21265bfa5e611b21b766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_91a21265bfa5e611b21b766cc8970d42"
 
   create_table "SyncEntry_91f1c1c188a4e3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7784,13 +7806,21 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_95342bd32acde211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_95342bd32acde211957a96147297305b"
 
-  create_table "SyncEntry_9bf5a184332ce311a9b796147297305b", primary_key: "ObjectId", force: true do |t|
+  create_table "SyncEntry_98b8ee879f3fe5118553766cc8970d42", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
     t.binary  "VersionNumber",  null: false
   end
 
-  add_index "SyncEntry_9bf5a184332ce311a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_9bf5a184332ce311a9b796147297305b"
+  add_index "SyncEntry_98b8ee879f3fe5118553766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_98b8ee879f3fe5118553766cc8970d42"
+
+  create_table "SyncEntry_9b3894c9f561e511896b766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_9b3894c9f561e511896b766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_9b3894c9f561e511896b766cc8970d42"
 
   create_table "SyncEntry_9df98ecc617ce3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7816,6 +7846,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_9f59e8a93beae211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_9f59e8a93beae211884d96147297305b"
 
+  create_table "SyncEntry_a04b7e332cade611b21b766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_a04b7e332cade611b21b766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_a04b7e332cade611b21b766cc8970d42"
+
   create_table "SyncEntry_a18c1ca1e9f2e211a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7831,6 +7869,14 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_a7e143f83beae211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_a7e143f83beae211884d96147297305b"
+
+  create_table "SyncEntry_a898afa5d82ce611a434766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_a898afa5d82ce611a434766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_a898afa5d82ce611a434766cc8970d42"
 
   create_table "SyncEntry_a91104ddf0efe211a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -7920,6 +7966,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_b085fa1201ebe211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_b085fa1201ebe211884d96147297305b"
 
+  create_table "SyncEntry_b1ef55e14b40e511a73c766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_b1ef55e14b40e511a73c766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_b1ef55e14b40e511a73c766cc8970d42"
+
   create_table "SyncEntry_b4b97b7258c2e211957a96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7960,14 +8014,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_b883789842eee211a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_b883789842eee211a9b796147297305b"
 
-  create_table "SyncEntry_b89dcc497c09e511bc1f96147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_b89dcc497c09e511bc1f96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_b89dcc497c09e511bc1f96147297305b"
-
   create_table "SyncEntry_b89eecb7e4e7e211884d96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -7992,22 +8038,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_b8f71b6bf1a9e3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_b8f71b6bf1a9e3118eb696147297305b"
 
-  create_table "SyncEntry_b985503bd98de3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_b985503bd98de3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_b985503bd98de3118eb696147297305b"
-
-  create_table "SyncEntry_ba30695193c7e4118b3596147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_ba30695193c7e4118b3596147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_ba30695193c7e4118b3596147297305b"
-
   create_table "SyncEntry_bbb88479e0b6e4118b3596147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8024,14 +8054,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_bc83098097c1e211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_bc83098097c1e211957a96147297305b"
 
-  create_table "SyncEntry_be01f3dc5345e311ade596147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_be01f3dc5345e311ade596147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_be01f3dc5345e311ade596147297305b"
-
   create_table "SyncEntry_bf3c24e19dc9e211957a96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8040,14 +8062,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_bf3c24e19dc9e211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_bf3c24e19dc9e211957a96147297305b"
 
-  create_table "SyncEntry_bff8d6d1b1c9e4118b3596147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_bff8d6d1b1c9e4118b3596147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_bff8d6d1b1c9e4118b3596147297305b"
-
   create_table "SyncEntry_c13e866ae9f2e211a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8055,14 +8069,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_c13e866ae9f2e211a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_c13e866ae9f2e211a9b796147297305b"
-
-  create_table "SyncEntry_c1c341b1dc8de3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_c1c341b1dc8de3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_c1c341b1dc8de3118eb696147297305b"
 
   create_table "SyncEntry_c1df9ec38566e3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -8104,14 +8110,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_c5fe37165e21e311a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_c5fe37165e21e311a9b796147297305b"
 
-  create_table "SyncEntry_c6565d453b8fe3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_c6565d453b8fe3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_c6565d453b8fe3118eb696147297305b"
-
   create_table "SyncEntry_c894a5a48bf4e211a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8151,14 +8149,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_cb6eb026e3cee211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_cb6eb026e3cee211957a96147297305b"
-
-  create_table "SyncEntry_cbb5f6753117e411956096147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_cbb5f6753117e411956096147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_cbb5f6753117e411956096147297305b"
 
   create_table "SyncEntry_ce69fc258deae311b1b096147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -8232,6 +8222,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_da133035ac59e211a63096147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_da133035ac59e211a63096147297305b"
 
+  create_table "SyncEntry_daad09f9ea7be511901f766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_daad09f9ea7be511901f766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_daad09f9ea7be511901f766cc8970d42"
+
   create_table "SyncEntry_de8e2141a3a3e3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8280,6 +8278,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_e18b70c9c9f2e211a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_e18b70c9c9f2e211a9b796147297305b"
 
+  create_table "SyncEntry_e30bc996c571e511901f766cc8970d42", primary_key: "ObjectId", force: true do |t|
+    t.integer "ObjectTypeCode", null: false
+    t.integer "SyncState",      null: false
+    t.binary  "VersionNumber",  null: false
+  end
+
+  add_index "SyncEntry_e30bc996c571e511901f766cc8970d42", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_e30bc996c571e511901f766cc8970d42"
+
   create_table "SyncEntry_e46845f939eae211884d96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8304,14 +8310,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_e59e2adb3fc2e211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_e59e2adb3fc2e211957a96147297305b"
 
-  create_table "SyncEntry_e8e0a9d68ff4e211a9b796147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_e8e0a9d68ff4e211a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_e8e0a9d68ff4e211a9b796147297305b"
-
   create_table "SyncEntry_e9e4f7e208e8e211884d96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8320,14 +8318,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_e9e4f7e208e8e211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_e9e4f7e208e8e211884d96147297305b"
 
-  create_table "SyncEntry_ea1e6078d98de3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_ea1e6078d98de3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_ea1e6078d98de3118eb696147297305b"
-
   create_table "SyncEntry_edfb8669ff16e311a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8335,14 +8325,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_edfb8669ff16e311a9b796147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_edfb8669ff16e311a9b796147297305b"
-
-  create_table "SyncEntry_eee8f742e7fae311b1b096147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_eee8f742e7fae311b1b096147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_eee8f742e7fae311b1b096147297305b"
 
   create_table "SyncEntry_ef1a1913c9dae3118fd996147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -8384,14 +8366,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_f2c3f58ac4e8e211884d96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_f2c3f58ac4e8e211884d96147297305b"
 
-  create_table "SyncEntry_f3eadb607078e3118eb696147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_f3eadb607078e3118eb696147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_f3eadb607078e3118eb696147297305b"
-
   create_table "SyncEntry_f3f5a8d5f9c2e211957a96147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8432,14 +8406,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_f7ca38e3594ee411b07e96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_f7ca38e3594ee411b07e96147297305b"
 
-  create_table "SyncEntry_f85e1e1f0862e41195d396147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_f85e1e1f0862e41195d396147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_f85e1e1f0862e41195d396147297305b"
-
   create_table "SyncEntry_f895807e48eee211a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8456,14 +8422,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "SyncEntry_f8f1af1040c2e211957a96147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_f8f1af1040c2e211957a96147297305b"
 
-  create_table "SyncEntry_f913980b2b5ce31198f996147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_f913980b2b5ce31198f996147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_f913980b2b5ce31198f996147297305b"
-
   create_table "SyncEntry_f95af40d461ae311a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
     t.integer "SyncState",      null: false
@@ -8479,14 +8437,6 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   add_index "SyncEntry_fabf4f49ac59e211a63096147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_fabf4f49ac59e211a63096147297305b"
-
-  create_table "SyncEntry_fb03b2a5c8f7e311b1b096147297305b", primary_key: "ObjectId", force: true do |t|
-    t.integer "ObjectTypeCode", null: false
-    t.integer "SyncState",      null: false
-    t.binary  "VersionNumber",  null: false
-  end
-
-  add_index "SyncEntry_fb03b2a5c8f7e311b1b096147297305b", ["ObjectTypeCode"], name: "ObjectTypeCode_SyncEntry_fb03b2a5c8f7e311b1b096147297305b"
 
   create_table "SyncEntry_fbe54eb10322e311a9b796147297305b", primary_key: "ObjectId", force: true do |t|
     t.integer "ObjectTypeCode", null: false
@@ -8631,7 +8581,7 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "SystemUserBase", ["FirstName"], name: "ndx_firstname"
   add_index "SystemUserBase", ["FullName", "YomiFullName"], name: "ndx_Cover"
   add_index "SystemUserBase", ["InternalEMailAddress"], name: "ndx_internalemailaddress"
-  add_index "SystemUserBase", ["IsDisabled", "AccessMode", "Title"], name: "ndx_SystemManaged_SystemUser"
+  add_index "SystemUserBase", ["IsDisabled", "AccessMode", "Title", "CreatedOn"], name: "ndx_SystemManaged_SystemUser"
   add_index "SystemUserBase", ["LastName"], name: "ndx_lastname"
   add_index "SystemUserBase", ["ParentSystemUserId"], name: "fndx_for_cascaderelationship_user_parent_user"
   add_index "SystemUserBase", ["SiteId"], name: "fndx_for_cascaderelationship_site_system_users"
@@ -8655,6 +8605,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "gap_CurrentGamePoints"
     t.uuid    "gap_CurrentGameId"
     t.uuid    "gap_CurrentRankId"
+    t.decimal "new_BillableRate",                   precision: 23, scale: 10
+    t.integer "new_Department"
   end
 
   create_table "SystemUserLicenses", primary_key: "SystemUserLicenseId", force: true do |t|
@@ -10081,6 +10033,76 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "new_checksExtensionBase", ["new_CheckDate", "new_VendorId", "new_CheckAmount", "new_AmountPaidCheck", "new_AmountAvailable"], name: "ndx_SystemManaged_new_checks"
   add_index "new_checksExtensionBase", ["new_name"], name: "ndx_new_name"
 
+  create_table "new_employeeBase", primary_key: "new_employeeId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OwnerId",                               null: false
+    t.integer  "OwnerIdType",                           null: false
+    t.uuid     "OwningBusinessUnit"
+    t.integer  "statecode",                             null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+    t.string   "EmailAddress",              limit: 256
+  end
+
+  add_index "new_employeeBase", ["OwnerId"], name: "ndx_Security"
+  add_index "new_employeeBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_employeeBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_employeeExtensionBase", primary_key: "new_employeeId", force: true do |t|
+    t.string   "new_name",                limit: 100
+    t.string   "new_FirstName",           limit: 50
+    t.string   "new_PositionTitle",       limit: 100
+    t.integer  "new_Department"
+    t.string   "new_EmployeeNumber",      limit: 5
+    t.datetime "new_DateofBirth"
+    t.boolean  "new_Sex"
+    t.integer  "new_EmploymentType"
+    t.integer  "new_MaritalStatus"
+    t.string   "new_PersonalEmail",       limit: 100
+    t.string   "new_PhoneNumber",         limit: 20
+    t.string   "new_StreetAddress",       limit: 100
+    t.string   "new_City",                limit: 100
+    t.string   "new_State",               limit: 13
+    t.string   "new_Zip",                 limit: 11
+    t.decimal  "new_Hoursperweek",                    precision: 23, scale: 10
+    t.decimal  "new_unloadedrate",                    precision: 23, scale: 10
+    t.decimal  "new_YearlySalary",                    precision: 23, scale: 10
+    t.uuid     "new_Supervisor"
+    t.string   "new_MiddleInitial",       limit: 6
+    t.string   "new_FullName",            limit: 100
+    t.datetime "new_DateofHire"
+    t.datetime "new_DateofTermination"
+    t.boolean  "new_EmploymentStatus"
+    t.integer  "new_ReasonofTermination"
+    t.boolean  "new_Organization"
+    t.string   "new_SSN",                 limit: 100
+    t.string   "new_orgname",             limit: 100
+    t.string   "new_EmployerID",          limit: 100
+    t.string   "new_orgaddress",          limit: 100
+    t.boolean  "new_EmploymentDuration"
+    t.datetime "new_ScheduledEnddate"
+    t.boolean  "new_FLSA"
+    t.integer  "new_PositionClass"
+    t.integer  "new_MBTAPass"
+    t.string   "new_MBTACommuterZone",    limit: 2
+    t.string   "new_OtherTransit",        limit: 100
+    t.string   "new_MAPCPhoneNumber",     limit: 20
+    t.string   "new_MaidenName",          limit: 100
+    t.integer  "new_Ethnicity"
+  end
+
+  add_index "new_employeeExtensionBase", ["new_EmployeeNumber", "new_Organization", "new_FirstName"], name: "ndx_SystemManaged_new_employee"
+  add_index "new_employeeExtensionBase", ["new_name"], name: "ndx_new_name"
+
   create_table "new_energyindicatorsBase", primary_key: "new_energyindicatorsId", force: true do |t|
     t.datetime "CreatedOn"
     t.uuid     "CreatedBy"
@@ -10328,7 +10350,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer  "new_Rebate"
   end
 
-  add_index "new_fcam_orderExtensionBase", ["new_Counter", "new_OrderDate", "new_BuyerId", "new_UnitsBought", "new_VendorInvoicedAmount", "new_VendorId", "new_VehicleId", "new_TransactionFeeAmount", "new_TransactionFeeStatus", "new_VendorAutoNumber", "new_RebatePaymentStatus", "new_FCAMPymentStatus"], name: "ndx_SystemManaged_new_fcam_order"
+  add_index "new_fcam_orderExtensionBase", ["new_Counter", "new_OrderDate", "new_BuyerId", "new_UnitsBought", "new_VendorInvoicedAmount", "new_VendorId", "new_VehicleId", "new_TransactionFeeAmount", "new_TransactionFeeStatus", "new_VendorAutoNumber", "new_RebatePaymentStatus", "new_FCAMPymentStatus", "new_DateTransactionFee"], name: "ndx_SystemManaged_new_fcam_order"
   add_index "new_fcam_orderExtensionBase", ["new_name"], name: "ndx_new_name"
 
   create_table "new_fcam_vehiclesBase", primary_key: "new_fcam_vehiclesId", force: true do |t|
@@ -10400,6 +10422,93 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "new_fcam_vendorsExtensionBase", ["new_OfficialName"], name: "ndx_SystemManaged_new_fcam_vendors"
   add_index "new_fcam_vendorsExtensionBase", ["new_name"], name: "ndx_new_name"
+
+  create_table "new_gbpcfysBase", primary_key: "new_gbpcfysId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OrganizationId"
+    t.integer  "statecode",                 null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_gbpcfysBase", ["OrganizationId"], name: "ndx_Security"
+  add_index "new_gbpcfysBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_gbpcfysBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_gbpcfysExtensionBase", primary_key: "new_gbpcfysId", force: true do |t|
+    t.string   "new_name",                   limit: 100
+    t.decimal  "new_TotalSales",                         precision: 23, scale: 10
+    t.decimal  "new_TotalTransactionFees",               precision: 23, scale: 10
+    t.decimal  "new_VehicleTransactionFees",             precision: 23, scale: 10
+    t.decimal  "new_EqFees",                             precision: 23, scale: 10
+    t.decimal  "new_TransactionFees20",                  precision: 23, scale: 10
+    t.decimal  "new_TransactionFees25",                  precision: 23, scale: 10
+    t.boolean  "new_ApplicableRate"
+    t.decimal  "new_Quarter1",                           precision: 23, scale: 10
+    t.decimal  "new_Quarter2",                           precision: 23, scale: 10
+    t.decimal  "new_Quarter3",                           precision: 23, scale: 10
+    t.decimal  "new_Quarter4",                           precision: 23, scale: 10
+    t.decimal  "new_RemainingAmount",                    precision: 23, scale: 10
+    t.integer  "new_FiscalYear"
+    t.datetime "new_StartDate"
+    t.datetime "new_EndDate"
+    t.string   "new_Q1Chek",                 limit: 20
+    t.string   "new_Q2Chek",                 limit: 20
+    t.string   "new_Q3Chek",                 limit: 20
+    t.string   "new_Q4Chek",                 limit: 20
+    t.datetime "new_Q1CheckDate"
+    t.datetime "new_Q2CheckDate"
+    t.datetime "new_Q3CheckDate"
+    t.datetime "new_Q4CheckDate"
+  end
+
+  add_index "new_gbpcfysExtensionBase", ["new_TotalTransactionFees", "new_TotalSales", "new_RemainingAmount", "new_ApplicableRate"], name: "ndx_SystemManaged_new_gbpcfys"
+  add_index "new_gbpcfysExtensionBase", ["new_name"], name: "ndx_new_name"
+
+  create_table "new_holidayworkrequestBase", primary_key: "new_holidayworkrequestId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OwnerId",                   null: false
+    t.integer  "OwnerIdType",               null: false
+    t.uuid     "OwningBusinessUnit"
+    t.integer  "statecode",                 null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_holidayworkrequestBase", ["OwnerId"], name: "ndx_Security"
+  add_index "new_holidayworkrequestBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_holidayworkrequestBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_holidayworkrequestExtensionBase", primary_key: "new_holidayworkrequestId", force: true do |t|
+    t.string   "new_number",            limit: 100
+    t.datetime "new_hDate"
+    t.datetime "new_eday"
+    t.integer  "new_Status"
+    t.uuid     "new_ApprovingManager"
+    t.boolean  "new_ApprovedbyManager"
+    t.boolean  "new_ApprovedbyHR"
+  end
+
+  add_index "new_holidayworkrequestExtensionBase", ["new_ApprovingManager", "new_hDate", "new_eday", "new_Status"], name: "ndx_SystemManaged_new_holidayworkrequest"
+  add_index "new_holidayworkrequestExtensionBase", ["new_number"], name: "ndx_new_number"
 
   create_table "new_hs_grantBase", primary_key: "new_hs_grantId", force: true do |t|
     t.datetime "CreatedOn"
@@ -10849,6 +10958,50 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "new_hspurchaseorder_accountExtensionBase", primary_key: "new_hspurchaseorder_accountId", force: true do |t|
   end
 
+  create_table "new_leaverequestBase", primary_key: "new_leaverequestId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OwnerId",                   null: false
+    t.integer  "OwnerIdType",               null: false
+    t.uuid     "OwningBusinessUnit"
+    t.integer  "statecode",                 null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_leaverequestBase", ["OwnerId"], name: "ndx_Security"
+  add_index "new_leaverequestBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_leaverequestBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_leaverequestExtensionBase", primary_key: "new_leaverequestId", force: true do |t|
+    t.string   "new_number",            limit: 100
+    t.integer  "new_LeaveType"
+    t.datetime "new_sd1"
+    t.datetime "new_ed1"
+    t.datetime "new_sd2"
+    t.datetime "new_ed2"
+    t.datetime "new_sd3"
+    t.datetime "new_ed3"
+    t.text     "new_Explanation"
+    t.integer  "new_Status"
+    t.boolean  "new_HRapproval"
+    t.decimal  "new_TotalWorkinghours",             precision: 23, scale: 10
+    t.decimal  "new_hoursperiod1",                  precision: 23, scale: 10
+    t.decimal  "new_hoursperiod2",                  precision: 23, scale: 10
+    t.decimal  "new_hoursperiod3",                  precision: 23, scale: 10
+  end
+
+  add_index "new_leaverequestExtensionBase", ["new_TotalWorkinghours", "new_Status", "new_sd1"], name: "ndx_SystemManaged_new_leaverequest"
+  add_index "new_leaverequestExtensionBase", ["new_number"], name: "ndx_new_number"
+
   create_table "new_mapc_ordersBase", primary_key: "new_mapc_ordersId", force: true do |t|
     t.datetime "CreatedOn"
     t.uuid     "CreatedBy"
@@ -10917,10 +11070,107 @@ ActiveRecord::Schema.define(version: 0) do
     t.decimal  "new_Secondcheckamount",                      precision: 23, scale: 10
     t.uuid     "new_GBPCOrderId"
     t.string   "new_VehicleIDNumber",            limit: 100
+    t.uuid     "new_EqContract"
+    t.uuid     "new_Equipment"
+    t.integer  "new_Equnitsbought"
+    t.string   "new_EqContractType",             limit: 100
+    t.string   "new_EqType",                     limit: 100
+    t.decimal  "new_VInvoicedAmount",                        precision: 23, scale: 10
+    t.decimal  "new_EqTransactionFee",                       precision: 23, scale: 10
+    t.decimal  "new_EquipmentInvoicedAmount",                precision: 23, scale: 10
+    t.decimal  "new_VehicleTransactionFee",                  precision: 23, scale: 10
+    t.decimal  "new_EqTransactionFeeAmount",                 precision: 23, scale: 10
+    t.decimal  "new_VehicleFeeRetained",                     precision: 23, scale: 10
+    t.decimal  "new_EqFeeRetained",                          precision: 23, scale: 10
+    t.decimal  "new_VehicleFeeGBPC",                         precision: 23, scale: 10
+    t.decimal  "new_EqFeetoGBPC",                            precision: 23, scale: 10
+    t.decimal  "new_FeeRetained75",                          precision: 23, scale: 10
+    t.decimal  "new_EqFeeRetained75",                        precision: 23, scale: 10
+    t.decimal  "new_TotalFeeRetained75",                     precision: 23, scale: 10
+    t.decimal  "new_VehicleFeeGBPC25",                       precision: 23, scale: 10
+    t.decimal  "new_EqFeeGBPC25",                            precision: 23, scale: 10
+    t.decimal  "new_TransactionFeeGBPC25",                   precision: 23, scale: 10
   end
 
-  add_index "new_mapc_ordersExtensionBase", ["new_VendorInvoicedAmount", "new_VendorId", "new_OrderDate", "new_BuyerId", "new_VechicleId", "new_Unitsbought", "new_CounterNumber", "new_TransactionFeeAmount", "new_VehicleIDNumber", "new_TransactionFeeStatus"], name: "ndx_SystemManaged_new_mapc_orders"
+  add_index "new_mapc_ordersExtensionBase", ["new_VendorInvoicedAmount", "new_VendorId", "new_OrderDate", "new_BuyerId", "new_VechicleId", "new_Unitsbought", "new_CounterNumber", "new_TransactionFeeAmount", "new_VehicleIDNumber", "new_TransactionFeeStatus", "new_TransactionFeeDateReceived"], name: "ndx_SystemManaged_new_mapc_orders"
   add_index "new_mapc_ordersExtensionBase", ["new_name"], name: "ndx_new_name"
+
+  create_table "new_mapc_projectassessmentBase", primary_key: "new_mapc_projectassessmentId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OwnerId",                                             null: false
+    t.integer  "OwnerIdType",                                         null: false
+    t.uuid     "OwningBusinessUnit"
+    t.integer  "statecode",                                           null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+    t.uuid     "TransactionCurrencyId"
+    t.decimal  "ExchangeRate",              precision: 23, scale: 10
+  end
+
+  add_index "new_mapc_projectassessmentBase", ["CreatedOn"], name: "ndx_SystemManaged_new_mapc_projectassessment"
+  add_index "new_mapc_projectassessmentBase", ["OwnerId"], name: "ndx_Security"
+  add_index "new_mapc_projectassessmentBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_mapc_projectassessmentBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_mapc_projectassessmentExtensionBase", primary_key: "new_mapc_projectassessmentId", force: true do |t|
+    t.string   "new_name",                       limit: 100
+    t.datetime "new_StartDate"
+    t.datetime "new_AnticipatedEndDate"
+    t.datetime "new_ActualCompletionDate"
+    t.uuid     "new_SelectProject"
+    t.integer  "new_LeadDepartment"
+    t.string   "new_ProjectGeography",           limit: 100
+    t.string   "new_KDriveLocation",             limit: 200
+    t.integer  "new_Schedule"
+    t.text     "new_ScheduleExperience"
+    t.decimal  "new_InitialBudget"
+    t.decimal  "new_initialbudget_Base"
+    t.decimal  "new_FinalBudget"
+    t.decimal  "new_finalbudget_Base"
+    t.text     "new_BudgetExplain"
+    t.integer  "new_FollowScope"
+    t.text     "new_ScopeExperience"
+    t.text     "new_Plus"
+    t.text     "new_Delta"
+    t.integer  "new_TeamPerformance"
+    t.text     "new_TeamCollabComment"
+    t.integer  "new_Partnerscollab"
+    t.text     "new_Partnerscomment"
+    t.text     "new_Innovativepublicengagement"
+    t.integer  "new_PublicEngagementCategories"
+    t.string   "new_engagementcategoriestext",   limit: 1000
+    t.text     "new_PublicEngagementComment"
+    t.string   "new_EquitySelection",            limit: 500
+    t.text     "new_EqutyAdvanced"
+    t.integer  "new_Equitycategories"
+    t.string   "new_equitytext",                 limit: 2000
+    t.text     "new_KeyDeliverables"
+    t.integer  "new_Deliverablessatisfaction"
+    t.text     "new_DeliverablesComments"
+    t.text     "new_ImplementationChallenges"
+    t.text     "new_MAPCRole"
+    t.boolean  "new_MAPCRoleYN"
+    t.text     "new_AlreadyImplemented"
+    t.text     "new_LongTermOutcomes"
+    t.text     "new_GoalsComment"
+    t.text     "new_TextEquity"
+    t.integer  "new_ProjectStatus"
+    t.string   "new_AssessmentStatus",           limit: 100
+    t.string   "new_AssessedProject",            limit: 150
+    t.boolean  "new_IsComplete"
+  end
+
+  add_index "new_mapc_projectassessmentExtensionBase", ["new_AssessmentStatus", "new_SelectProject"], name: "ndx_SystemManaged_new_mapc_projectassessment"
+  add_index "new_mapc_projectassessmentExtensionBase", ["new_name"], name: "ndx_new_name"
 
   create_table "new_mapccontractsBase", primary_key: "new_mapccontractsId", force: true do |t|
     t.datetime "CreatedOn"
@@ -10966,6 +11216,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "new_ReportDate"
     t.uuid     "new_Autonumber"
     t.uuid     "new_ProjectId"
+    t.boolean  "new_Housing"
   end
 
   add_index "new_mapccontractsExtensionBase", ["new_TypeofFunding", "new_TotalAmount", "new_StartDate", "new_MAPCProjectNumber", "new_MAPCDepartment", "new_FiscalYear", "new_EndDate", "new_Description", "new_CurrentStatus", "new_Contractor", "new_ContractType", "new_CompletionDate", "new_BudgetCategory", "new_ReportDate"], name: "ndx_SystemManaged_new_mapccontracts"
@@ -11096,9 +11347,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean  "new_StrPrClimateChange"
     t.boolean  "new_sp_SmartGrowth"
     t.uuid     "new_Autonumber"
+    t.boolean  "new_timeperiod"
   end
 
-  add_index "new_mapcprojectExtensionBase", ["new_MAPCProjectnr", "new_LeadDepartment", "new_count", "new_StartDate", "new_ProjectStatus", "new_MunicipalitiesType", "new_Fundingmain", "new_EndDate", "new_Equity"], name: "ndx_SystemManaged_new_mapcproject"
+  add_index "new_mapcprojectExtensionBase", ["new_LeadDepartment", "new_count", "new_StartDate", "new_ProjectStatus", "new_MunicipalitiesType", "new_Fundingmain", "new_EndDate", "new_Equity", "new_timeperiod", "new_ActualCompletionDate", "new_Showonwebsite", "new_TotalBudget", "new_PrimaryFunding"], name: "ndx_SystemManaged_new_mapcproject"
   add_index "new_mapcprojectExtensionBase", ["new_name"], name: "ndx_new_name"
 
   create_table "new_mapcpurchaseorderBase", primary_key: "new_mapcpurchaseorderId", force: true do |t|
@@ -11219,11 +11471,12 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "new_mfuturegoalsBase", ["statecode", "statuscode"], name: "ndx_Core"
 
   create_table "new_mfuturegoalsExtensionBase", primary_key: "new_mfuturegoalsId", force: true do |t|
-    t.string  "new_name",   limit: 150
+    t.string  "new_name",        limit: 150
     t.integer "new_Number"
+    t.string  "new_Description", limit: 300
   end
 
-  add_index "new_mfuturegoalsExtensionBase", ["new_Number"], name: "ndx_SystemManaged_new_mfuturegoals"
+  add_index "new_mfuturegoalsExtensionBase", ["new_Number", "new_Description"], name: "ndx_SystemManaged_new_mfuturegoals"
   add_index "new_mfuturegoalsExtensionBase", ["new_name"], name: "ndx_new_name"
 
   create_table "new_mfutureobjectiveBase", primary_key: "new_mfutureobjectiveId", force: true do |t|
@@ -11374,6 +11627,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "new_TownIDMA_TownsSimplifiedMap"
     t.decimal "new_Population",                              precision: 23, scale: 10
     t.decimal "new_Unemploymentrate",                        precision: 23, scale: 10
+    t.string  "new_GeoID",                       limit: 17
   end
 
   add_index "new_municipalitiesExtensionBase", ["new_RegionalPlanningAgency", "new_Prefix", "new_MetroFuture", "new_MAPCSubregionId", "new_MAPCCoordinator", "new_County", "new_Communitytype"], name: "ndx_SystemManaged_new_municipalities"
@@ -11470,6 +11724,380 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "new_new_vehicle_new_vendorcontractExtensionBase", primary_key: "new_new_vehicle_new_vendorcontractId", force: true do |t|
   end
 
+  create_table "new_oscontractBase", primary_key: "new_oscontractId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OrganizationId"
+    t.integer  "statecode",                             null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.string   "EmailAddress",              limit: 256
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_oscontractBase", ["OrganizationId"], name: "ndx_Security"
+  add_index "new_oscontractBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_oscontractBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_oscontractExtensionBase", primary_key: "new_oscontractId", force: true do |t|
+    t.string   "new_name",             limit: 100
+    t.uuid     "new_Vendor"
+    t.string   "new_Description",      limit: 100
+    t.integer  "new_AwardYear"
+    t.integer  "new_ContractYear"
+    t.decimal  "new_TransactionFee",               precision: 23, scale: 10
+    t.decimal  "new_VendorAmount",                 precision: 23, scale: 10
+    t.decimal  "new_FeeAmount",                    precision: 23, scale: 10
+    t.uuid     "new_SelectAutonumber"
+    t.string   "new_ContractNumber",   limit: 100
+    t.boolean  "new_BillsReceived"
+    t.integer  "new_prStatus"
+    t.datetime "new_Responseduedate"
+    t.decimal  "new_Braintree",                    precision: 23, scale: 10
+    t.decimal  "new_Cohasset",                     precision: 23, scale: 10
+    t.decimal  "new_Duxbury",                      precision: 23, scale: 10
+    t.decimal  "new_Hingham",                      precision: 23, scale: 10
+    t.decimal  "new_Hull",                         precision: 23, scale: 10
+    t.decimal  "new_Marshfield",                   precision: 23, scale: 10
+    t.decimal  "new_Milton",                       precision: 23, scale: 10
+    t.decimal  "new_Norwell",                      precision: 23, scale: 10
+    t.decimal  "new_Pembroke",                     precision: 23, scale: 10
+    t.decimal  "new_Scituate",                     precision: 23, scale: 10
+    t.decimal  "new_Weymouth",                     precision: 23, scale: 10
+    t.string   "new_VendorContact",    limit: 100
+    t.string   "new_VendorPhone",      limit: 100
+    t.string   "new_VendorAddress",    limit: 100
+    t.string   "new_VendorFirstName",  limit: 100
+    t.string   "new_VendorLastName",   limit: 100
+    t.string   "new_Salutation",       limit: 100
+    t.decimal  "new_tBraintree",                   precision: 23, scale: 10
+    t.decimal  "new_tCohasset",                    precision: 23, scale: 10
+    t.decimal  "new_tDuxbury",                     precision: 23, scale: 10
+    t.decimal  "new_tHingham",                     precision: 23, scale: 10
+    t.decimal  "new_tHull",                        precision: 23, scale: 10
+    t.decimal  "new_tMarshfield",                  precision: 23, scale: 10
+    t.decimal  "new_tPembroke",                    precision: 23, scale: 10
+    t.decimal  "new_tScituate",                    precision: 23, scale: 10
+    t.decimal  "new_tMilton",                      precision: 23, scale: 10
+    t.decimal  "new_tNorwell",                     precision: 23, scale: 10
+    t.decimal  "new_tWeymouth",                    precision: 23, scale: 10
+    t.uuid     "new_PrimaryContact"
+  end
+
+  add_index "new_oscontractExtensionBase", ["new_Vendor", "new_FeeAmount", "new_prStatus", "new_Description", "new_ContractYear", "new_ContractNumber", "new_BillsReceived", "new_AwardYear", "new_VendorAmount"], name: "ndx_SystemManaged_new_oscontract"
+  add_index "new_oscontractExtensionBase", ["new_name"], name: "ndx_new_name"
+
+  create_table "new_pdrequestBase", primary_key: "new_pdrequestId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OwnerId",                   null: false
+    t.integer  "OwnerIdType",               null: false
+    t.uuid     "OwningBusinessUnit"
+    t.integer  "statecode",                 null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_pdrequestBase", ["CreatedOn"], name: "ndx_SystemManaged_new_pdrequest"
+  add_index "new_pdrequestBase", ["OwnerId"], name: "ndx_Security"
+  add_index "new_pdrequestBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_pdrequestBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_pdrequestExtensionBase", primary_key: "new_pdrequestId", force: true do |t|
+    t.string   "new_eventname",                     limit: 100
+    t.integer  "new_EventType"
+    t.integer  "new_nremployees"
+    t.text     "new_Benefit"
+    t.boolean  "new_ApprovedDD"
+    t.datetime "new_StartDate"
+    t.datetime "new_EndDate"
+    t.boolean  "new_Submitted"
+    t.decimal  "new_Registration",                               precision: 23, scale: 10
+    t.decimal  "new_AirBusTrain",                                precision: 23, scale: 10
+    t.decimal  "new_Hotel",                                      precision: 23, scale: 10
+    t.decimal  "new_Meal",                                       precision: 23, scale: 10
+    t.decimal  "new_LocalTransportation",                        precision: 23, scale: 10
+    t.decimal  "new_Miscellaneous",                              precision: 23, scale: 10
+    t.string   "new_Other",                         limit: 100
+    t.decimal  "new_maxperperson",                               precision: 23, scale: 10
+    t.decimal  "new_PDreg",                                      precision: 23, scale: 10
+    t.decimal  "new_Proftravel",                                 precision: 23, scale: 10
+    t.decimal  "new_PDHotel",                                    precision: 23, scale: 10
+    t.decimal  "new_PDMeal",                                     precision: 23, scale: 10
+    t.decimal  "new_PDLocTransp",                                precision: 23, scale: 10
+    t.decimal  "new_PDMisc",                                     precision: 23, scale: 10
+    t.decimal  "new_PDOther",                                    precision: 23, scale: 10
+    t.decimal  "new_PDTotal",                                    precision: 23, scale: 10
+    t.decimal  "new_Otherreg",                                   precision: 23, scale: 10
+    t.decimal  "new_OtherTravel",                                precision: 23, scale: 10
+    t.decimal  "new_OtherHotel",                                 precision: 23, scale: 10
+    t.decimal  "new_OtherMeal",                                  precision: 23, scale: 10
+    t.decimal  "new_OtherLocTransp",                             precision: 23, scale: 10
+    t.decimal  "new_OtherMisc",                                  precision: 23, scale: 10
+    t.decimal  "new_OOther",                                     precision: 23, scale: 10
+    t.decimal  "new_OtherTotal",                                 precision: 23, scale: 10
+    t.decimal  "new_BillableTime",                               precision: 23, scale: 10
+    t.decimal  "new_PDBillableTime",                             precision: 23, scale: 10
+    t.decimal  "new_OtherBillableTime",                          precision: 23, scale: 10
+    t.integer  "new_Numberofdays"
+    t.string   "new_City",                          limit: 20
+    t.string   "new_State",                         limit: 20
+    t.string   "new_Country",                       limit: 20
+    t.integer  "new_ApprovalStatus"
+    t.string   "new_RequestNumber",                 limit: 100
+    t.decimal  "new_MaxAmountnotime",                            precision: 23, scale: 10
+    t.decimal  "new_MaxAmountPDtime",                            precision: 23, scale: 10
+    t.string   "new_Participantstext",              limit: 4000
+    t.decimal  "new_othercost",                                  precision: 23, scale: 10
+    t.decimal  "new_NumberofBillabledays",                       precision: 23, scale: 10
+    t.decimal  "new_EstCostTime",                                precision: 23, scale: 10
+    t.decimal  "new_TotalCost",                                  precision: 23, scale: 10
+    t.decimal  "new_TotalCostPD",                                precision: 23, scale: 10
+    t.decimal  "new_EstimatedCostofPDBillableTime",              precision: 23, scale: 10
+    t.string   "new_names",                         limit: 1000
+    t.decimal  "new_Amountothersources",                         precision: 23, scale: 10
+    t.string   "new_NameProjects",                  limit: 200
+  end
+
+  add_index "new_pdrequestExtensionBase", ["new_StartDate", "new_RequestNumber", "new_EventType", "new_EndDate", "new_ApprovalStatus", "new_nremployees", "new_Numberofdays"], name: "ndx_SystemManaged_new_pdrequest"
+  add_index "new_pdrequestExtensionBase", ["new_eventname"], name: "ndx_new_eventname"
+
+  create_table "new_pdrequest_participantBase", primary_key: "new_pdrequest_participantId", force: true do |t|
+    t.binary "VersionNumber"
+    t.uuid   "new_pdrequestid", null: false
+    t.uuid   "systemuserid",    null: false
+  end
+
+  add_index "new_pdrequest_participantBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_pdrequest_participantBase", ["new_pdrequestid", "systemuserid"], name: "ndx_new_pdrequest_participant", unique: true
+  add_index "new_pdrequest_participantBase", ["systemuserid"], name: "ndx_systemuserid"
+
+  create_table "new_pdrequest_participantExtensionBase", primary_key: "new_pdrequest_participantId", force: true do |t|
+  end
+
+  create_table "new_personalpdrequestBase", primary_key: "new_personalpdrequestId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OwnerId",                   null: false
+    t.integer  "OwnerIdType",               null: false
+    t.uuid     "OwningBusinessUnit"
+    t.integer  "statecode",                 null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_personalpdrequestBase", ["CreatedOn"], name: "ndx_SystemManaged_new_personalpdrequest"
+  add_index "new_personalpdrequestBase", ["OwnerId"], name: "ndx_Security"
+  add_index "new_personalpdrequestBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_personalpdrequestBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_personalpdrequestExtensionBase", primary_key: "new_personalpdrequestId", force: true do |t|
+    t.string   "new_number",                     limit: 100
+    t.uuid     "new_PDRequestId"
+    t.string   "new_EventName",                  limit: 100
+    t.datetime "new_StartDate"
+    t.datetime "new_EndDate"
+    t.boolean  "new_subapproval"
+    t.boolean  "new_Approved"
+    t.integer  "new_Roleattheevent"
+    t.integer  "new_Department"
+    t.string   "new_City",                       limit: 100
+    t.string   "new_State",                      limit: 100
+    t.string   "new_Country",                    limit: 100
+    t.text     "new_Description"
+    t.integer  "new_daysParticipating"
+    t.decimal  "new_hrsbilledPD",                            precision: 23, scale: 10
+    t.decimal  "new_RegistrationFee",                        precision: 23, scale: 10
+    t.decimal  "new_BillableHours",                          precision: 23, scale: 10
+    t.decimal  "new_pdTravel",                               precision: 23, scale: 10
+    t.decimal  "new_pdhotel",                                precision: 23, scale: 10
+    t.decimal  "new_PDMeal",                                 precision: 23, scale: 10
+    t.decimal  "new_pdLocal",                                precision: 23, scale: 10
+    t.decimal  "new_pdMisc",                                 precision: 23, scale: 10
+    t.decimal  "new_pdOther",                                precision: 23, scale: 10
+    t.decimal  "new_TotalRequestedPDAmount",                 precision: 23, scale: 10
+    t.decimal  "new_CCHotelBilled",                          precision: 23, scale: 10
+    t.decimal  "new_RegFeebilledtoCC",                       precision: 23, scale: 10
+    t.decimal  "new_ccTravel",                               precision: 23, scale: 10
+    t.string   "new_hoursChargecode",            limit: 30
+    t.string   "new_regfeechargecode",           limit: 30
+    t.string   "new_TravelCC",                   limit: 100
+    t.string   "new_HotelChargecodeused",        limit: 100
+    t.decimal  "new_LocalTransportationCC",                  precision: 23, scale: 10
+    t.decimal  "new_CCMeal",                                 precision: 23, scale: 10
+    t.decimal  "new_CCMiscellaneous",                        precision: 23, scale: 10
+    t.decimal  "new_OtherCC",                                precision: 23, scale: 10
+    t.decimal  "new_TotalBilledtoOtheraccounts",             precision: 23, scale: 10
+    t.string   "new_LocTranspChargeCode",        limit: 100
+    t.string   "new_MealChargeCode",             limit: 100
+    t.string   "new_OtherChargeCode",            limit: 100
+    t.string   "new_MiscChargeCode",             limit: 100
+    t.uuid     "new_User"
+    t.decimal  "new_TotalPDAmount",                          precision: 23, scale: 10
+    t.decimal  "new_TotalOther",                             precision: 23, scale: 10
+    t.decimal  "new_TotalAmountSpent",                       precision: 23, scale: 10
+    t.integer  "new_counter"
+  end
+
+  add_index "new_personalpdrequestExtensionBase", ["new_User", "new_StartDate", "new_EventName", "new_EndDate", "new_counter"], name: "ndx_SystemManaged_new_personalpdrequest"
+  add_index "new_personalpdrequestExtensionBase", ["new_number"], name: "ndx_new_number"
+
+  create_table "new_pm_buyerBase", primary_key: "new_pm_buyerId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OrganizationId"
+    t.integer  "statecode",                             null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.string   "EmailAddress",              limit: 256
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_pm_buyerBase", ["OrganizationId"], name: "ndx_Security"
+  add_index "new_pm_buyerBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_pm_buyerBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_pm_buyerExtensionBase", primary_key: "new_pm_buyerId", force: true do |t|
+    t.string "new_buyerID",       limit: 100
+    t.uuid   "new_ContactPerson"
+    t.string "new_Address",       limit: 150
+    t.string "new_Phone",         limit: 100
+  end
+
+  add_index "new_pm_buyerExtensionBase", ["new_Phone", "new_ContactPerson", "new_Address"], name: "ndx_SystemManaged_new_pm_buyer"
+  add_index "new_pm_buyerExtensionBase", ["new_buyerID"], name: "ndx_new_buyerID"
+
+  create_table "new_pm_invoiceBase", primary_key: "new_pm_invoiceId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OrganizationId"
+    t.integer  "statecode",                                           null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+    t.uuid     "TransactionCurrencyId"
+    t.decimal  "ExchangeRate",              precision: 23, scale: 10
+  end
+
+  add_index "new_pm_invoiceBase", ["OrganizationId"], name: "ndx_Security"
+  add_index "new_pm_invoiceBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_pm_invoiceBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_pm_invoiceExtensionBase", primary_key: "new_pm_invoiceId", force: true do |t|
+    t.string   "new_invoiceID",           limit: 100
+    t.uuid     "new_OrganizationId"
+    t.uuid     "new_MAPC_POId"
+    t.decimal  "new_TotalValue"
+    t.decimal  "new_totalvalue_Base"
+    t.datetime "new_DatePaid"
+    t.datetime "new_DateSent"
+    t.string   "new_CheckNumber",         limit: 100
+    t.decimal  "new_MAPCRetains"
+    t.decimal  "new_mapcretains_Base"
+    t.decimal  "new_MARPARebate"
+    t.decimal  "new_marparebate_Base"
+    t.integer  "new_counter"
+    t.string   "new_addressline",         limit: 200
+    t.string   "new_CityStateZip",        limit: 100
+    t.string   "new_Country",             limit: 100
+    t.string   "new_addressline2",        limit: 100
+    t.string   "new_ContractNumber",      limit: 100
+    t.string   "new_ContractDescription", limit: 100
+  end
+
+  add_index "new_pm_invoiceExtensionBase", ["new_TotalValue", "new_OrganizationId", "new_MARPARebate", "new_MAPCRetains", "new_DateSent", "new_DatePaid", "new_CheckNumber"], name: "ndx_SystemManaged_new_pm_invoice"
+  add_index "new_pm_invoiceExtensionBase", ["new_invoiceID"], name: "ndx_new_invoiceID"
+
+  create_table "new_pm_orderBase", primary_key: "new_pm_orderId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OrganizationId"
+    t.integer  "statecode",                                           null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+    t.uuid     "TransactionCurrencyId"
+    t.decimal  "ExchangeRate",              precision: 23, scale: 10
+  end
+
+  add_index "new_pm_orderBase", ["OrganizationId"], name: "ndx_Security"
+  add_index "new_pm_orderBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_pm_orderBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_pm_orderExtensionBase", primary_key: "new_pm_orderId", force: true do |t|
+    t.string  "new_orderID",            limit: 100
+    t.uuid    "new_OrganizationId"
+    t.integer "new_OrderStatus"
+    t.uuid    "new_ContractId"
+    t.uuid    "new_InvoiceId"
+    t.uuid    "new_BuyerId"
+    t.boolean "new_VendorType"
+    t.string  "new_Product",            limit: 150
+    t.text    "new_ProductDescription"
+    t.integer "new_Quantity"
+    t.decimal "new_Price"
+    t.decimal "new_price_Base"
+    t.decimal "new_TotalValue"
+    t.decimal "new_totalvalue_Base"
+    t.decimal "new_AdminFee"
+    t.decimal "new_adminfee_Base"
+    t.decimal "new_MAPCRetains"
+    t.decimal "new_mapcretains_Base"
+    t.decimal "new_MARPARebate"
+    t.decimal "new_marparebate_Base"
+    t.integer "new_Quarter"
+    t.integer "new_Year"
+    t.string  "new_VendorAddress",      limit: 100
+    t.integer "new_counter"
+  end
+
+  add_index "new_pm_orderExtensionBase", ["new_TotalValue", "new_BuyerId", "new_AdminFee", "new_Product", "new_OrganizationId", "new_MARPARebate", "new_MAPCRetains", "new_ContractId"], name: "ndx_SystemManaged_new_pm_order"
+  add_index "new_pm_orderExtensionBase", ["new_orderID"], name: "ndx_new_orderID"
+
   create_table "new_positionBase", primary_key: "new_positionId", force: true do |t|
     t.datetime "CreatedOn"
     t.uuid     "CreatedBy"
@@ -11533,6 +12161,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "new_Certificationvaliduntil"
     t.boolean  "new_CICertified"
     t.string   "new_Country",                 limit: 100
+    t.datetime "new_SummaryCILawReceived"
+    t.datetime "new_SummaryOMLawreceived"
   end
 
   add_index "new_positionExtensionBase", ["new_NameId"], name: "ndx_for_cascaderelationship_new_account_new_position"
@@ -11805,6 +12435,12 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "new_ContactLN",           limit: 100
     t.string   "new_VendorContactFN",     limit: 100
     t.decimal  "new_totalestimated",                  precision: 23, scale: 10
+    t.decimal  "new_Hanover",                         precision: 23, scale: 10
+    t.decimal  "new_townHanover",                     precision: 23, scale: 10
+    t.decimal  "new_Millis",                          precision: 23, scale: 10
+    t.decimal  "new_Wellesley",                       precision: 23, scale: 10
+    t.decimal  "new_townMillis",                      precision: 23, scale: 10
+    t.decimal  "new_townWellesley",                   precision: 23, scale: 10
   end
 
   add_index "new_pw_contractsExtensionBase", ["new_Vendor", "new_Item", "new_Description2", "new_Autonumber", "new_AwardYtext", "new_ContractYtext", "new_ProcessingStatus", "new_VendorRepotedAmount", "new_TransactionFee"], name: "ndx_SystemManaged_new_pw_contracts"
@@ -11838,6 +12474,98 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "new_syncmappingExtensionBase", ["new_OutlookField"], name: "ndx_SystemManaged_new_syncmapping"
   add_index "new_syncmappingExtensionBase", ["new_name"], name: "ndx_new_name"
+
+  create_table "new_timeuserecordBase", primary_key: "new_timeuserecordId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OwnerId",                   null: false
+    t.integer  "OwnerIdType",               null: false
+    t.uuid     "OwningBusinessUnit"
+    t.integer  "statecode",                 null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_timeuserecordBase", ["CreatedOn"], name: "ndx_SystemManaged_new_timeuserecord"
+  add_index "new_timeuserecordBase", ["OwnerId"], name: "ndx_Security"
+  add_index "new_timeuserecordBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_timeuserecordBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_timeuserecordExtensionBase", primary_key: "new_timeuserecordId", force: true do |t|
+    t.string   "new_id",         limit: 100
+    t.uuid     "new_EmployeeId"
+    t.integer  "new_Type"
+    t.datetime "new_Date"
+    t.decimal  "new_TimeUsed",               precision: 23, scale: 10
+    t.integer  "new_ChangeType"
+  end
+
+  add_index "new_timeuserecordExtensionBase", ["new_EmployeeId"], name: "ndx_for_cascaderelationship_new_vacationuser_timeuse"
+  add_index "new_timeuserecordExtensionBase", ["new_Type", "new_TimeUsed", "new_Date", "new_ChangeType"], name: "ndx_SystemManaged_new_timeuserecord"
+  add_index "new_timeuserecordExtensionBase", ["new_id"], name: "ndx_new_id"
+
+  create_table "new_vacationuseraccountBase", primary_key: "new_vacationuseraccountId", force: true do |t|
+    t.datetime "CreatedOn"
+    t.uuid     "CreatedBy"
+    t.datetime "ModifiedOn"
+    t.uuid     "ModifiedBy"
+    t.uuid     "CreatedOnBehalfBy"
+    t.uuid     "ModifiedOnBehalfBy"
+    t.uuid     "OwnerId",                   null: false
+    t.integer  "OwnerIdType",               null: false
+    t.uuid     "OwningBusinessUnit"
+    t.integer  "statecode",                 null: false
+    t.integer  "statuscode"
+    t.binary   "VersionNumber"
+    t.integer  "ImportSequenceNumber"
+    t.datetime "OverriddenCreatedOn"
+    t.integer  "TimeZoneRuleVersionNumber"
+    t.integer  "UTCConversionTimeZoneCode"
+  end
+
+  add_index "new_vacationuseraccountBase", ["OwnerId"], name: "ndx_Security"
+  add_index "new_vacationuseraccountBase", ["VersionNumber"], name: "ndx_Sync"
+  add_index "new_vacationuseraccountBase", ["statecode", "statuscode"], name: "ndx_Core"
+
+  create_table "new_vacationuseraccountExtensionBase", primary_key: "new_vacationuseraccountId", force: true do |t|
+    t.string   "new_name",                 limit: 100
+    t.string   "new_FirstName",            limit: 100
+    t.string   "new_LastName",             limit: 100
+    t.datetime "new_HireDate"
+    t.datetime "new_ServiceDate"
+    t.decimal  "new_AccrualVacation",                  precision: 23, scale: 10
+    t.decimal  "new_AccrualDiscretionary",             precision: 23, scale: 10
+    t.decimal  "new_AccrualSick",                      precision: 23, scale: 10
+    t.decimal  "new_BalanceVacation",                  precision: 23, scale: 10
+    t.decimal  "new_BalanceSick",                      precision: 23, scale: 10
+    t.decimal  "new_BalanceDiscretionary",             precision: 23, scale: 10
+    t.decimal  "new_CapVacation",                      precision: 23, scale: 10
+    t.decimal  "new_CapSick",                          precision: 23, scale: 10
+    t.decimal  "new_CapDiscretionary",                 precision: 23, scale: 10
+    t.integer  "new_YearsofService"
+    t.decimal  "new_lastbalancevacation",              precision: 23, scale: 10
+    t.decimal  "new_lastbalancesick",                  precision: 23, scale: 10
+    t.integer  "new_serviceyear"
+    t.decimal  "new_TwoYearCap",                       precision: 23, scale: 10
+    t.decimal  "new_VacationLast",                     precision: 23, scale: 10
+    t.decimal  "new_VacationUsed",                     precision: 23, scale: 10
+    t.decimal  "new_sickused",                         precision: 23, scale: 10
+    t.decimal  "new_DiscretionaryUsed",                precision: 23, scale: 10
+    t.datetime "new_lastupdated"
+    t.integer  "new_processingFY"
+    t.decimal  "new_AccrualthisFY",                    precision: 23, scale: 10
+  end
+
+  add_index "new_vacationuseraccountExtensionBase", ["new_name"], name: "ndx_new_name"
+  add_index "new_vacationuseraccountExtensionBase", ["new_serviceyear", "new_TwoYearCap", "new_ServiceDate", "new_HireDate", "new_CapDiscretionary", "new_BalanceVacation", "new_BalanceSick", "new_BalanceDiscretionary", "new_AccrualVacation", "new_CapSick", "new_AccrualSick"], name: "ndx_SystemManaged_new_vacationuseraccount"
 
   create_table "new_vehicleBase", primary_key: "new_vehicleId", force: true do |t|
     t.datetime "CreatedOn"
