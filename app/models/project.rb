@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   self.table_name  = 'new_mapcprojectBase'
   self.primary_key = 'new_mapcprojectId'
 
-  # has_many   :images, foreign_key: 'ObjectId'
+  has_many   :images, foreign_key: 'ObjectId'
   belongs_to :manager,         class_name: 'ProjectManager', foreign_key: 'OwnerId'
   belongs_to :lead_department, class_name: 'Department',     foreign_key: 'OwningBusinessUnit'
 
@@ -33,9 +33,9 @@ class Project < ActiveRecord::Base
   end
 
   # Most recent image
-  # def image
-  #   images.order("ModifiedOn").last
-  # end
+  def image
+    images.order("ModifiedOn").last
+  end
 
   def to_param
     "#{count}--#{name.to_s.parameterize}"
@@ -107,9 +107,9 @@ class Project < ActiveRecord::Base
     shortname_for(department_name)
   end
 
-  # def image_url(style=nil)
-  #   image.url(style) if image
-  # end
+  def image_url(style=nil)
+    image.url(style) if image
+  end
 
   def next
     self.class

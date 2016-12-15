@@ -3,7 +3,7 @@ class API::V1::ProjectResource < JSONAPI::Resource
 
   attributes :title,
              :description,
-             # :image,
+             :image,
              :location,
              :primary_department,
              :primary_department_short,
@@ -43,16 +43,16 @@ class API::V1::ProjectResource < JSONAPI::Resource
     new(model, context)
   end
 
-  # def image
-  #   styles = {}
-  #   if @model.image
-  #     u = Rails.application.routes.url_helpers
-  #     styles = { small:  u.image_url(@model.image, style: 'small'),
-  #       medium: u.image_url(@model.image, style: 'medium'),
-  #       large:  u.image_url(@model.image, style: 'large') }
-  #   end
-  #   styles
-  # end
+  def image
+    styles = {}
+    if @model.image
+      u = Rails.application.routes.url_helpers
+      styles = { small:  u.image_url(@model.image, style: 'small'),
+        medium: u.image_url(@model.image, style: 'medium'),
+        large:  u.image_url(@model.image, style: 'large') }
+    end
+    styles
+  end
 
   # Switched for presentation. "Next" should give a project updated
   # less recently, instead of more recently.
