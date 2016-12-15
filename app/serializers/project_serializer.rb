@@ -7,13 +7,13 @@ class ProjectSerializer < ApplicationSerializer
     object.to_param.to_s
   end
 
-  attribute :image do
-    if context[:is_collection]
-      object.image_url(:small)
-    else
-      object.image_url(:large)
-    end
-  end
+  # attribute :image do
+  #   if context[:is_collection]
+  #     object.image_url(:small)
+  #   else
+  #     object.image_url(:large)
+  #   end
+  # end
 
   attribute :title do
     object.new_name
