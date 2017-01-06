@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-gem 'bundler', '1.11.2'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'rails', '4.1.2'
 gem 'rails-api'
@@ -53,7 +53,7 @@ group :development, :test do
   gem 'vcr',                   '~> 2.4' # Record API calls for tests
   gem 'childprocess',          '~> 0.5' # Fix a version conflict
   gem 'webmock', '~> 1.8.4', require: false # Faking requests (supports VCR)
-  gem 'minitest'                        # Unclear why we use this
+  gem 'minitest'
 end
 
 group :production do
