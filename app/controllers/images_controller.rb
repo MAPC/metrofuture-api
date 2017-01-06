@@ -1,6 +1,6 @@
 class ImagesController < ActionController::Base
-
   def show
+    expires_in 30.days, public: true
     filename = "#{params[:id]}.#{params[:format]}"
     style    = params.fetch(:style) { nil }
 
