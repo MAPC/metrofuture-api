@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-gem 'bundler', '1.11.2'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'rails', '4.1.2'
 gem 'rails-api'
@@ -44,6 +44,8 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rspec-rails',        '~> 2.14.0' # Stick to a specific version
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'factory_girl_rails',    '~> 4.0' # Build factories quickly
@@ -53,7 +55,7 @@ group :development, :test do
   gem 'vcr',                   '~> 2.4' # Record API calls for tests
   gem 'childprocess',          '~> 0.5' # Fix a version conflict
   gem 'webmock', '~> 1.8.4', require: false # Faking requests (supports VCR)
-  gem 'minitest'                        # Unclear why we use this
+  gem 'minitest'
 end
 
 group :production do
