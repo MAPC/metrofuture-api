@@ -121,6 +121,11 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.4.2)
+      byebug (~> 9.0)
+      pry (~> 0.10)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     puma (3.6.0)
     rack (1.5.5)
     rack-cors (0.4.0)
@@ -241,6 +246,8 @@ DEPENDENCIES
   memory_profiler
   minitest
   pg
+  pry-byebug
+  pry-rails
   puma
   rack-cors
   rack-mini-profiler

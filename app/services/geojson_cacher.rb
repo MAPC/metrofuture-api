@@ -16,7 +16,7 @@ class GeojsonCacher < BaseCacher
   private
 
     def geometry_base_url
-      "http://api.censusreporter.org/1.0/geo/tiger2013/#{@object.geoid}?geom=true"
+      "http://api.censusreporter.org/1.0/geo/tiger2015/#{@object.geoid}?geom=true"
     end
 
     def ensure_properties(hash)

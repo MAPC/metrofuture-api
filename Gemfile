@@ -44,6 +44,8 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rspec-rails',        '~> 2.14.0' # Stick to a specific version
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'factory_girl_rails',    '~> 4.0' # Build factories quickly
