@@ -4,7 +4,7 @@ ruby '2.3.1'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 
-gem 'rails', '4.1.2'
+gem 'rails', '~> 4.1'
 gem 'rails-api'
 
 # Database connection
